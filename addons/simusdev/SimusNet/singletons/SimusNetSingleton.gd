@@ -24,7 +24,14 @@ static var __static_class_list: Array[Object] = [
 	SimusNetDeserializer.new(),
 ]
 
+static var _instance: SimusNetSingleton
+
+static func get_instance() -> SimusNetSingleton:
+	return _instance
+
 func _ready() -> void:
+	_instance = self
+	
 	info = SimusNetInfo.new()
 	_set_active(false, true)
 	get_tree().root.add_child.call_deferred(info)
