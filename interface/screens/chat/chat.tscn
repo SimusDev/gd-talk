@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://cd2pv4swunf5u"]
 
+[ext_resource type="Theme" uid="uid://bu5140stldhdf" path="res://resources/themes/main.tres" id="1_0cygg"]
 [ext_resource type="Script" uid="uid://b7vafmbdj5nwn" path="res://interface/screens/chat/chat.gd" id="1_fuwf6"]
 [ext_resource type="Script" uid="uid://bhlmygil3fmv6" path="res://interface/screens/ui_i_visibility_listener.gd" id="2_rvtho"]
+[ext_resource type="Script" uid="uid://df2q4bgbgj6sc" path="res://components/smooth_scrollbar.gd" id="4_f55m7"]
 
 [node name="Chat" type="Control" unique_id=723013631 node_paths=PackedStringArray("_container")]
 layout_mode = 3
@@ -10,6 +12,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_0cygg")
 script = ExtResource("1_fuwf6")
 _container = NodePath("_Container/VBoxContainer")
 metadata/_edit_horizontal_guides_ = [650.0]
@@ -19,15 +22,19 @@ script = ExtResource("2_rvtho")
 item = NodePath("..")
 metadata/_custom_type_script = "uid://bhlmygil3fmv6"
 
-[node name="_Container" type="ScrollContainer" parent="." unique_id=1593561347]
+[node name="_Container" type="ScrollContainer" parent="." unique_id=864062102]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
-anchor_bottom = 0.90300006
-offset_bottom = -0.16003418
+anchor_bottom = 0.95400006
+offset_bottom = 0.11993408
 grow_horizontal = 2
 grow_vertical = 2
 follow_focus = true
+horizontal_scroll_mode = 4
+vertical_scroll_mode = 4
+script = ExtResource("4_f55m7")
+metadata/_custom_type_script = "uid://df2q4bgbgj6sc"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="_Container" unique_id=362513280]
 layout_mode = 2
@@ -35,18 +42,16 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
-[node name="LineEdit" type="LineEdit" parent="." unique_id=915000888]
+[node name="LineEdit" type="LineEdit" parent="." unique_id=1966975152]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.90300006
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -0.16003418
+offset_top = -33.0
 grow_horizontal = 2
 grow_vertical = 2
 placeholder_text = "ENTER TEXT HERE..."
-alignment = 1
-keep_editing_on_text_submit = true
 
 [connection signal="on_changed" from="C_IVisibilityListener" to="." method="_on_c_i_visibility_listener_on_changed"]
 [connection signal="text_submitted" from="LineEdit" to="." method="_on_line_edit_text_submitted"]

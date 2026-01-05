@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://cmcf56bshk847"
-path="res://.godot/imported/8bitoperator_jve.ttf-841d293e3c4c51a19794383637465f6d.fontdata"
+path="res://.godot/imported/8bitoperator_jve.ttf-21c1e217991409de44aad8b7f7beb20c.fontdata"
 
 [deps]
 
-source_file="res://fonts/8bitoperator_jve.ttf"
-dest_files=["res://.godot/imported/8bitoperator_jve.ttf-841d293e3c4c51a19794383637465f6d.fontdata"]
+source_file="res://resources/fonts/8bitoperator_jve.ttf"
+dest_files=["res://.godot/imported/8bitoperator_jve.ttf-21c1e217991409de44aad8b7f7beb20c.fontdata"]
 
 [params]
 

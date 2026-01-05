@@ -5,9 +5,8 @@
 [ext_resource type="Script" uid="uid://buo415nhjgsrx" path="res://addons/simusdev/localization/SD_NodeLocalizatorProperty.gd" id="2_0wfyh"]
 [ext_resource type="Script" uid="uid://df2q4bgbgj6sc" path="res://components/smooth_scrollbar.gd" id="4_jyhfs"]
 [ext_resource type="Shader" uid="uid://ok5sp7xdctqq" path="res://resources/shaders/circle.gdshader" id="5_tbgi4"]
-[ext_resource type="Texture2D" uid="uid://bhjby7wvwe4q0" path="res://icon.png" id="6_o6xl0"]
+[ext_resource type="Texture2D" uid="uid://6djfocvlrten" path="res://addons/simusdev/components/fp_controller/source_like/icon.png" id="6_tefeu"]
 [ext_resource type="PackedScene" uid="uid://cd2pv4swunf5u" path="res://interface/screens/chat/chat.tscn" id="7_o6xl0"]
-[ext_resource type="Texture2D" uid="uid://wvbghph8kmk7" path="res://addons/simusdev/components/fp_controller/source/icon.png" id="7_tipki"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sugp2"]
 bg_color = Color(0.05197096, 0.051970966, 0.051970914, 1)
@@ -17,28 +16,14 @@ font_size = 18
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tefeu"]
 shader = ExtResource("5_tbgi4")
-shader_parameter/radius = 64.0
-shader_parameter/size = Vector2(256, 256)
+shader_parameter/antialiasing = 0.01
 
 [sub_resource type="GDScript" id="GDScript_sugp2"]
 resource_name = "main_server_button_script"
 script/source = "extends Button
 
 func _pressed() -> void:
-	if not GDTalk.global_chat.is_connected:
-		GDTalk.pkg_server.try_connect_to_main()
-		
-		await SimusNetEvents.event_connected.published
-		await GDTalk.for_async_synchronize()
-		
-		##auth
-		GDTalk.pkg_auth.request(
-			GDTalk.pkg_auth.get_last_login(),
-			GDTalk.pkg_auth.get_last_password()
-			)
-		##
-		
-		GDTalk.global_chat.request_connect()
+	GDTalk.pkg_server.try_connect_to_main()
 "
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tefeu"]
@@ -89,10 +74,10 @@ vertical_alignment = 1
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=980102914]
 visible = false
 layout_mode = 0
-offset_left = 148.0
-offset_top = 102.0
-offset_right = 345.0
-offset_bottom = 448.0
+offset_left = 1014.0
+offset_top = 130.0
+offset_right = 1211.0
+offset_bottom = 476.0
 
 [node name="_create_server" type="Button" parent="VBoxContainer" unique_id=1473437049]
 custom_minimum_size = Vector2(0, 64)
@@ -156,20 +141,10 @@ layout_mode = 2
 material = SubResource("ShaderMaterial_tefeu")
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-icon = ExtResource("6_o6xl0")
-flat = true
+icon = ExtResource("6_tefeu")
 icon_alignment = 1
 expand_icon = true
 script = SubResource("GDScript_sugp2")
-
-[node name="ls" type="Button" parent="ScrollContainer/VBoxContainer2" unique_id=1658441330]
-material = SubResource("ShaderMaterial_tefeu")
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-icon = ExtResource("7_tipki")
-flat = true
-icon_alignment = 1
-expand_icon = true
 
 [node name="main_content" type="Control" parent="." unique_id=175973090]
 layout_mode = 1
@@ -201,7 +176,6 @@ offset_left = 95.0
 offset_top = 32.0
 offset_right = -890.28
 offset_bottom = -8.0
-mouse_filter = 2
 
 [node name="Panel" type="Panel" parent="folders" unique_id=837780010]
 layout_mode = 1
