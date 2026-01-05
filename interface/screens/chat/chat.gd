@@ -55,7 +55,8 @@ func _on_line_edit_text_submitted(new_text: String) -> void:
 	reference.send_message(new_text)
 
 func _on_message_recieve(id: int) -> void:
-	var ui: UI_ChatMessage = UI_ChatMessage.get_scene().instantiate()
-	ui.id = id
-	ui.chat = reference
-	_container.add_child(ui)
+	if reference.is_connected:
+		var ui: UI_ChatMessage = UI_ChatMessage.get_scene().instantiate()
+		ui.id = id
+		ui.chat = reference
+		_container.add_child(ui)

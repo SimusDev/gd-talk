@@ -74,6 +74,7 @@ func _connect_user(user: C_User) -> void:
 
 func _disconnect_user(user: C_User) -> void:
 	on_user_disconnected.emit(user)
+	_connected.erase(user.get_peer_id())
 	user.on_disconnected.emit()
 	user.queue_free()
 	SD_Console.i().write_info("[is_server: %s] %s disconnected." % [SimusNetConnection.is_server(), user.login])

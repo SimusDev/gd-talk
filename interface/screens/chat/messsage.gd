@@ -22,5 +22,6 @@ func _on_sync(_id: int, msg: R_ChatMessage) -> void:
 	resource = msg
 	ui_loading_animation.queue_free()
 	var sender: C_User = C_User.find_by_login(msg.sender)
-	$ui_avatar.user = sender
-	$SD_RichTextLabel.text = sender.get_login_richtext() + ": " + str(msg.data)
+	if sender:
+		$ui_avatar.user = sender
+		$SD_RichTextLabel.text = sender.get_login_richtext() + ": " + str(msg.data)

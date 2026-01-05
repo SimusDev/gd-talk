@@ -16,6 +16,11 @@ signal on_message_recieve(id: int)
 
 var is_connected: bool = false
 
+var _voice: C_VoiceChannel
+
+func get_voice_channel() -> C_VoiceChannel:
+	return
+
 func get_message_count() -> int:
 	return _messages_count
 
