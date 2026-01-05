@@ -4,7 +4,7 @@ class_name UI_LoadingAnimation
 
 @onready var sd_label: SD_Label = $SD_Label
 
-var _state: int = 0
+var _state: int = 2
 
 @export var time: float = 0.5
 var _timer: float = 0
