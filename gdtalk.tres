@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="R_GDTalkSettings" format=3 uid="uid://b3kbssf13itcy"]
+
+[ext_resource type="Script" uid="uid://b21i0romnysrm" path="res://components/R_GDTalkSettings.gd" id="1_edjui"]
+[ext_resource type="PackedScene" uid="uid://sd2abl5ax36s" path="res://interface/screens/account/account.tscn" id="1_wsabg"]
+[ext_resource type="PackedScene" uid="uid://clnay03plwe4p" path="res://interface/screens/online/online.tscn" id="2_pk8kk"]
+
+[resource]
+script = ExtResource("1_edjui")
+main_server_ip = "194.87.236.101"
+app_screens = Dictionary[StringName, PackedScene]({
+&"gdtalk.account": ExtResource("1_wsabg"),
+&"gdtalk.online": ExtResource("2_pk8kk")
+})
+metadata/_custom_type_script = "uid://b21i0romnysrm"

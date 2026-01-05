@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://sd2abl5ax36s"]
+
+[ext_resource type="Script" uid="uid://3ddhk6c8bw6k" path="res://interface/screens/account/account.gd" id="1_vxl1s"]
+[ext_resource type="PackedScene" uid="uid://cctb0km01oite" path="res://interface/screens/account/avatar.tscn" id="2_epr0k"]
+[ext_resource type="PackedScene" uid="uid://bm03qmw23albi" path="res://interface/screens/account/panel.tscn" id="3_3blrh"]
+[ext_resource type="PackedScene" uid="uid://fbdb2ooek758" path="res://interface/avatar/ui_avatar_file_dialog.tscn" id="3_75y4e"]
+[ext_resource type="Script" uid="uid://851bhpxqx0n8" path="res://addons/simusdev/localization/SD_RichTextLabelSimple.gd" id="4_yqtbn"]
+
+[node name="Account" type="Control" unique_id=582238314 node_paths=PackedStringArray("_ui_avatar")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vxl1s")
+_ui_avatar = NodePath("ScrollContainer/VBoxContainer/Avatar/ui_avatar")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1869038504]
+custom_minimum_size = Vector2(980, 720)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.117000006
+anchor_right = 0.883
+anchor_bottom = 1.0
+offset_left = 0.23999023
+offset_right = -0.23999023
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer" unique_id=1401341864]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Avatar" parent="ScrollContainer/VBoxContainer" unique_id=94239995 instance=ExtResource("2_epr0k")]
+layout_mode = 2
+
+[node name="Login" parent="ScrollContainer/VBoxContainer" unique_id=2089543949 instance=ExtResource("3_3blrh")]
+layout_mode = 2
+
+[node name="LoginLabel" type="RichTextLabel" parent="ScrollContainer/VBoxContainer/Login" unique_id=813447732]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 16
+scroll_active = false
+shortcut_keys_enabled = false
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_yqtbn")
+metadata/_custom_type_script = "uid://851bhpxqx0n8"
+
+[node name="AvatarFileDialog" parent="." unique_id=202652692 instance=ExtResource("3_75y4e")]
+filters = PackedStringArray("*.png", "*.jpg", "*.jpeg")
+
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Avatar" to="." method="_on_avatar_pressed"]
+[connection signal="on_image_selected" from="AvatarFileDialog" to="." method="_on_avatar_file_dialog_on_image_selected"]
+
+[editable path="ScrollContainer/VBoxContainer/Avatar"]

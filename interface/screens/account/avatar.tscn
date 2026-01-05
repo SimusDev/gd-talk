@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://cctb0km01oite"]
+
+[ext_resource type="PackedScene" uid="uid://bm03qmw23albi" path="res://interface/screens/account/panel.tscn" id="1_af7od"]
+[ext_resource type="Script" uid="uid://cbtql2isn5ycx" path="res://interface/screens/account/avatar.gd" id="2_v7x55"]
+[ext_resource type="PackedScene" uid="uid://iv1pt2snl3c" path="res://interface/avatar/ui_avatar.tscn" id="3_pa1ex"]
+[ext_resource type="Script" uid="uid://buo415nhjgsrx" path="res://addons/simusdev/localization/SD_NodeLocalizatorProperty.gd" id="4_sxpm5"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_asmsf"]
+font_size = 40
+
+[node name="Avatar" unique_id=94239995 instance=ExtResource("1_af7od")]
+custom_minimum_size = Vector2(512, 200)
+offset_bottom = -520.0
+script = ExtResource("2_v7x55")
+metadata/_edit_vertical_guides_ = [200.0]
+
+[node name="ui_avatar" parent="." index="0" unique_id=1445784157 instance=ExtResource("3_pa1ex")]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+
+[node name="Label" type="Label" parent="." index="1" unique_id=2117677693]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.39100003
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.1920166
+grow_horizontal = 2
+grow_vertical = 2
+text = "Avatar"
+label_settings = SubResource("LabelSettings_asmsf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SD_NodeLocalizatorProperty" type="Node" parent="Label" index="0" unique_id=115708008 node_paths=PackedStringArray("node")]
+process_mode = 4
+script = ExtResource("4_sxpm5")
+node = NodePath("..")
+key = &"gdtalk.avatar"
+metadata/_custom_type_script = "uid://buo415nhjgsrx"

@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://c3un57sqvtynm"]
+
+[ext_resource type="Script" uid="uid://3mje75tknu1s" path="res://interface/screens/tab_container.gd" id="1_scdad"]
+
+[node name="TabContainer" type="TabContainer" unique_id=449065417]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+tab_alignment = 1
+tab_focus_mode = 1
+script = ExtResource("1_scdad")

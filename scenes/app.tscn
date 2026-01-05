@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://8o6wtep3qwhx"]
+
+[ext_resource type="Script" uid="uid://6cmsxynakiib" path="res://scenes/app.gd" id="1_0wu41"]
+[ext_resource type="PackedScene" uid="uid://c3un57sqvtynm" path="res://interface/screens/tab_container.tscn" id="2_1670a"]
+
+[node name="App" type="Control" unique_id=415920920]
+texture_filter = 6
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0wu41")
+
+[node name="TabContainer" parent="." unique_id=449065417 instance=ExtResource("2_1670a")]
+layout_mode = 1

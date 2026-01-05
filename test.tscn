@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://8i0jn4pip0n0"]
+
+[ext_resource type="Script" uid="uid://buo415nhjgsrx" path="res://addons/simusdev/localization/SD_NodeLocalizatorProperty.gd" id="1_t0skd"]
+
+[node name="Node" type="Node" unique_id=1756571599]
+
+[node name="Button" type="Button" parent="." unique_id=814887091]
+offset_right = 122.0
+offset_bottom = 40.0
+text = "Enter"
+
+[node name="SD_NodeLocalizatorProperty" type="Node" parent="Button" unique_id=1218004914 node_paths=PackedStringArray("node")]
+process_mode = 4
+script = ExtResource("1_t0skd")
+node = NodePath("..")
+key = &"gdtalk.enter"
+metadata/_custom_type_script = "uid://buo415nhjgsrx"

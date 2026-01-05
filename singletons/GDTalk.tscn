@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://cnp4334xekn7g"]
+
+[ext_resource type="Script" uid="uid://cjlg4l0ffik8x" path="res://singletons/GDTalk.gd" id="1_6vrth"]
+[ext_resource type="Script" uid="uid://dha4l88s1hmpo" path="res://singletons/packages/PKG_Storage.gd" id="2_gryl8"]
+[ext_resource type="Script" uid="uid://c4eroadv4yyc8" path="res://components/C_Chat.gd" id="2_i31cw"]
+[ext_resource type="Script" uid="uid://ej8af0q0385d" path="res://singletons/packages/PKG_Auth.gd" id="2_nc26l"]
+[ext_resource type="Script" uid="uid://cnl02kyicsa1s" path="res://singletons/packages/PKG_Microphone.gd" id="4_y5i4d"]
+[ext_resource type="Script" uid="uid://lf0m0ue641sq" path="res://singletons/packages/PKG_Users.gd" id="5_erfs0"]
+[ext_resource type="Script" uid="uid://pt1kixnoh32m" path="res://singletons/packages/PKG_Server.gd" id="6_xrw8h"]
+
+[node name="GDTalk" type="Node" unique_id=2123216483 node_paths=PackedStringArray("pkg_storage", "pkg_server", "pkg_auth", "pkg_microphone", "pkg_users", "global_chat")]
+script = ExtResource("1_6vrth")
+pkg_storage = NodePath("PKG_Storage")
+pkg_server = NodePath("PKG_Server")
+pkg_auth = NodePath("PKG_Auth")
+pkg_microphone = NodePath("PKG_Microphone")
+pkg_users = NodePath("PKG_Users")
+global_chat = NodePath("GlobalChat")
+
+[node name="GlobalChat" type="Node" parent="." unique_id=1870123287]
+script = ExtResource("2_i31cw")
+metadata/_custom_type_script = "uid://c4eroadv4yyc8"
+
+[node name="PKG_Server" type="Node" parent="." unique_id=1773683700]
+script = ExtResource("6_xrw8h")
+metadata/_custom_type_script = "uid://pt1kixnoh32m"
+
+[node name="PKG_Storage" type="Node" parent="." unique_id=2001289990]
+script = ExtResource("2_gryl8")
+metadata/_custom_type_script = "uid://dha4l88s1hmpo"
+
+[node name="PKG_Auth" type="Node" parent="." unique_id=155359570]
+script = ExtResource("2_nc26l")
+metadata/_custom_type_script = "uid://ej8af0q0385d"
+
+[node name="PKG_Microphone" type="Node" parent="." unique_id=1353869672]
+script = ExtResource("4_y5i4d")
+metadata/_custom_type_script = "uid://cnl02kyicsa1s"
+
+[node name="PKG_Users" type="Node" parent="." unique_id=1738999529]
+script = ExtResource("5_erfs0")
+metadata/_custom_type_script = "uid://lf0m0ue641sq"

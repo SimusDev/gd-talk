@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://fbdb2ooek758"]
+
+[ext_resource type="Script" uid="uid://cpeas3u6aa03b" path="res://interface/avatar/ui_avatar_file_dialog.gd" id="1_868bu"]
+
+[node name="AvatarFileDialog" type="FileDialog" unique_id=202652692]
+oversampling_override = 1.0
+title = "Open a File"
+file_mode = 0
+access = 2
+filters = PackedStringArray(".png")
+show_hidden_files = true
+use_native_dialog = true
+script = ExtResource("1_868bu")
+
+[connection signal="file_selected" from="." to="." method="_on_file_selected"]

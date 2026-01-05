@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://ckdprk1khqptu"]
+
+[ext_resource type="Script" uid="uid://bpvr1oq6g761f" path="res://addons/simusdev/popups/SD_UIPopupReference.gd" id="1_dk6tt"]
+[ext_resource type="Script" uid="uid://bxycsjbmhbgx6" path="res://addons/simusdev/ui/SD_UIControlDrag.gd" id="1_uhyq4"]
+[ext_resource type="Script" uid="uid://c2rlqeq2bwvd0" path="res://addons/simusdev/localization/SD_Label.gd" id="2_86mmh"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_uhyq4"]
+
+[node name="Base" type="Panel" unique_id=413319313]
+offset_right = 463.0
+offset_bottom = 381.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SE_UIControlDrag" type="Node" parent="." unique_id=1257628268 node_paths=PackedStringArray("TARGET_INPUT", "TARGET_DRAG")]
+script = ExtResource("1_uhyq4")
+TARGET_INPUT = NodePath("..")
+TARGET_DRAG = NodePath("..")
+metadata/_custom_type_script = "uid://bxycsjbmhbgx6"
+
+[node name="SD_UIPopupReference" type="Node" parent="." unique_id=450712523 node_paths=PackedStringArray("root")]
+script = ExtResource("1_dk6tt")
+root = NodePath("..")
+metadata/_custom_type_script = "uid://bpvr1oq6g761f"
+
+[node name="bar" type="Control" parent="." unique_id=481401041]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="bar" unique_id=1223045208]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="SD_Label" type="Label" parent="bar" unique_id=1459679314]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Window"
+label_settings = SubResource("LabelSettings_uhyq4")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+script = ExtResource("2_86mmh")
+localization_enabled = true
+localization_key = "title.window"
+metadata/_custom_type_script = "uid://c2rlqeq2bwvd0"
+
+[node name="close" type="Button" parent="bar" unique_id=1967337609]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -50.0
+offset_bottom = 50.0
+grow_horizontal = 0
+text = "X"
+
+[node name="content" type="Control" parent="." unique_id=597350581]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[connection signal="pressed" from="bar/close" to="SD_UIPopupReference" method="close"]

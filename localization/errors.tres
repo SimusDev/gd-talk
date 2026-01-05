@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="SD_LocalizationResource" format=3 uid="uid://2n3pqxge0ncc"]
+
+[ext_resource type="Script" uid="uid://ta36ebtpvxq7" path="res://addons/simusdev/localization/SD_LocalizationResource.gd" id="1_yylnq"]
+
+[resource]
+script = ExtResource("1_yylnq")
+DATA = "[en]
+error.wrong_password = \"Wrong password!\"
+error.password_empty = \"Password can't be empty!\"
+error.login_empty = \"Login can't be empty!\"
+error.user_already_active = \"User already active!\"
+error.file_is_too_big = \"File is too big\"
+error.image_size_too_big = \"Image size is too big\"
+
+[ru]
+error.wrong_password = \"Неправильный пароль!\"
+error.password_empty = \"Пароль не может быть пустым!\"
+error.login_empty = \"Логин не может быть пустым!\"
+error.user_already_active = \"Пользователь уже активен!\"
+error.file_is_too_big = \"Файл слишком большой\"
+error.image_size_too_big = \"Изображение слишком большое\"
+"
+metadata/_custom_type_script = "uid://ta36ebtpvxq7"

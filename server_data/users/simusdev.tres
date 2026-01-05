@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="R_ServerData" format=3 uid="uid://2ikh8v3aq7jv"]
+
+[ext_resource type="Script" uid="uid://mdljvd5dyjd2" path="res://components/R_ServerData.gd" id="1_gc7rm"]
+
+[resource]
+script = ExtResource("1_gc7rm")
+storage = {
+&"password": "dev5678"
+}

@@ -1,0 +1,136 @@
+[gd_scene format=3 uid="uid://bfjrq5fx8b4y8"]
+
+[ext_resource type="Script" uid="uid://cckyygdk7jjh0" path="res://scenes/auth.gd" id="1_ro4lu"]
+[ext_resource type="Script" uid="uid://buo415nhjgsrx" path="res://addons/simusdev/localization/SD_NodeLocalizatorProperty.gd" id="2_bqik1"]
+[ext_resource type="Script" uid="uid://c2rlqeq2bwvd0" path="res://addons/simusdev/localization/SD_Label.gd" id="3_air3p"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_air3p"]
+font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_rgw86"]
+
+[node name="Auth" type="Control" unique_id=1762330097 node_paths=PackedStringArray("_login", "_password", "_message")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ro4lu")
+_login = NodePath("MarginContainer/VBoxContainer/_login")
+_password = NodePath("MarginContainer/VBoxContainer/_password")
+_message = NodePath("MarginContainer/VBoxContainer/_message")
+metadata/_edit_horizontal_guides_ = [632.0]
+
+[node name="Panel" type="Panel" parent="." unique_id=1863567783]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="." unique_id=1596997780]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.164
+offset_bottom = -0.08000183
+grow_horizontal = 2
+grow_vertical = 2
+text = "Authentication"
+label_settings = SubResource("LabelSettings_air3p")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SD_NodeLocalizatorProperty" type="Node" parent="Title" unique_id=258280059 node_paths=PackedStringArray("node")]
+process_mode = 4
+script = ExtResource("2_bqik1")
+node = NodePath("..")
+key = &"gdtalk.auth"
+metadata/_custom_type_script = "uid://buo415nhjgsrx"
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=840884008]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.164
+anchor_right = 1.0
+anchor_bottom = 0.86800003
+offset_top = -0.08000183
+offset_bottom = 0.039978027
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 128
+theme_override_constants/margin_top = 128
+theme_override_constants/margin_right = 128
+theme_override_constants/margin_bottom = 128
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1776361754]
+layout_mode = 2
+
+[node name="_login" type="LineEdit" parent="MarginContainer/VBoxContainer" unique_id=1530804919]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+placeholder_text = "Login"
+alignment = 1
+
+[node name="SD_NodeLocalizatorProperty" type="Node" parent="MarginContainer/VBoxContainer/_login" unique_id=17289321 node_paths=PackedStringArray("node")]
+process_mode = 4
+script = ExtResource("2_bqik1")
+property = &"placeholder_text"
+node = NodePath("..")
+key = &"gdtalk.login"
+metadata/_custom_type_script = "uid://buo415nhjgsrx"
+
+[node name="_password" type="LineEdit" parent="MarginContainer/VBoxContainer" unique_id=1627974418]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+placeholder_text = "Password"
+alignment = 1
+
+[node name="SD_NodeLocalizatorProperty" type="Node" parent="MarginContainer/VBoxContainer/_password" unique_id=1959031151 node_paths=PackedStringArray("node")]
+process_mode = 4
+script = ExtResource("2_bqik1")
+property = &"placeholder_text"
+node = NodePath("..")
+key = &"gdtalk.password"
+metadata/_custom_type_script = "uid://buo415nhjgsrx"
+
+[node name="_enter" type="Button" parent="MarginContainer/VBoxContainer" unique_id=103231655]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+text = "Enter"
+
+[node name="SD_NodeLocalizatorProperty" type="Node" parent="MarginContainer/VBoxContainer/_enter" unique_id=661244460 node_paths=PackedStringArray("node")]
+process_mode = 4
+script = ExtResource("2_bqik1")
+node = NodePath("..")
+key = &"gdtalk.enter"
+metadata/_custom_type_script = "uid://buo415nhjgsrx"
+
+[node name="_message" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1946967860]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_rgw86")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+script = ExtResource("3_air3p")
+localization_enabled = true
+metadata/_custom_type_script = "uid://c2rlqeq2bwvd0"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=719401148]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.019000001
+anchor_top = 0.878
+anchor_right = 0.98
+anchor_bottom = 0.96700007
+offset_left = -0.3200016
+offset_top = -0.16003418
+offset_right = 0.5999756
+offset_bottom = -0.24005127
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/_enter" to="." method="_on__enter_pressed"]
