@@ -14,8 +14,8 @@ func set_user(new: C_User) -> void:
 		await ready
 	
 	if is_instance_valid(user):
-		_changed()
 		user.on_avatar_changed.connect(_changed)
+	_changed()
 
 func get_scene() -> PackedScene:
 	return load("uid://iv1pt2snl3c")
@@ -26,6 +26,10 @@ func _ready() -> void:
 	
 
 func _changed() -> void:
-	_icon.texture = user.get_avatar()
-	$star.visible = user.is_admin()
-	
+	if is_instance_valid(user):
+		_icon.texture = user.get_avatar()
+		$star.visible = user.is_admin()
+	else:
+		_icon.texture = null
+		$star.visible = false
+		
