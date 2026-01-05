@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_t8jmc")
 storage = {
-&"password": "1"
+&"password": "123"
 }

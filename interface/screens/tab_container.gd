@@ -8,4 +8,5 @@ func _ready() -> void:
 		localizator.key = id
 		localizator.property = "name"
 		instance.add_child(localizator)
+		instance.visible = false
 		add_child(instance)

@@ -32,6 +32,15 @@ static func get_package() -> PKG_Users:
 static func get_connected_as_list() -> Array[C_User]:
 	return get_package().get_connected_as_list()
 
+static func find_by_peer_id(id: int) -> C_User:
+	return get_package().get_connected().get(id)
+
+static func find_by_login(_login: String) -> C_User:
+	for i in get_package().get_connected_as_list():
+		if i.login == _login:
+			return i
+	return null
+
 static func get_local() -> C_User:
 	return _local
 

@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://bbo6fhliu2ml"]
+
+[ext_resource type="Script" uid="uid://daeoda4ehcrog" path="res://interface/loading/ui_loading_animation.gd" id="1_oe5px"]
+[ext_resource type="Script" uid="uid://c2rlqeq2bwvd0" path="res://addons/simusdev/localization/SD_Label.gd" id="2_0br6b"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0br6b"]
+font_size = 216
+
+[node name="UiLoadingAnimation" type="Control" unique_id=1349119607]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_oe5px")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1334717769]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5882353)
+
+[node name="SD_Label" type="Label" parent="." unique_id=1886476016]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_0br6b")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+script = ExtResource("2_0br6b")
+font_size = 216
+autosize_rect = true
+autosize_rect_scale = 2.0
+metadata/_custom_type_script = "uid://c2rlqeq2bwvd0"
