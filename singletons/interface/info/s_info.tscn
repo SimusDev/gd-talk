@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://mvaw0u6eaab3"]
+
+[ext_resource type="Script" uid="uid://dh67lrywu16oa" path="res://singletons/interface/info/s_info.gd" id="1_ede1q"]
+[ext_resource type="Script" uid="uid://4esxnjtpdiq0" path="res://components/ui/AttachContainer.gd" id="2_sjpgd"]
+
+[node name="info" type="CanvasLayer" unique_id=2119132578]
+script = ExtResource("1_ede1q")
+
+[node name="Control" type="Control" parent="." unique_id=1002475846]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AttachContainer" type="Control" parent="Control" unique_id=1032319224]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -424.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("2_sjpgd")
+vertical_align = 1
+metadata/_custom_type_script = "uid://4esxnjtpdiq0"
+
+[node name="ColorRect" type="ColorRect" parent="Control/AttachContainer" unique_id=236719696]
+layout_mode = 0
+offset_left = 192.0
+offset_right = 232.0
+offset_bottom = 39.999878
+
+[node name="ColorRect2" type="ColorRect" parent="Control/AttachContainer" unique_id=626290583]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 49.999878
+offset_right = 232.0
+offset_bottom = 89.99982
+
+[node name="ColorRect3" type="ColorRect" parent="Control/AttachContainer" unique_id=1666527933]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 99.99982
+offset_right = 232.0
+offset_bottom = 139.9997
+
+[node name="ColorRect4" type="ColorRect" parent="Control/AttachContainer" unique_id=1205262407]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 149.99976
+offset_right = 232.0
+offset_bottom = 189.99963
+
+[node name="ColorRect5" type="ColorRect" parent="Control/AttachContainer" unique_id=906774260]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 199.9997
+offset_right = 232.0
+offset_bottom = 239.99997
+
+[node name="ColorRect6" type="ColorRect" parent="Control/AttachContainer" unique_id=131131372]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 249.99963
+offset_right = 232.0
+offset_bottom = 289.99976
+
+[node name="ColorRect7" type="ColorRect" parent="Control/AttachContainer" unique_id=1768506545]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 299.99982
+offset_right = 232.0
+offset_bottom = 339.99976

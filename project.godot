@@ -24,11 +24,16 @@ driver/enable_input=true
 
 SimusDev="*uid://cvfrshw18g5he"
 GDTalk="*uid://cnp4334xekn7g"
+GDTalkInfo="*uid://dh67lrywu16oa"
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+
+[dotnet]
+
+project/assembly_name="GDTalk"
 
 [editor_plugins]
 
