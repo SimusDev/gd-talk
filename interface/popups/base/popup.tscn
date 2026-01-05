@@ -1,0 +1,118 @@
+[gd_scene format=3 uid="uid://k17pdpimwf6p"]
+
+[ext_resource type="Script" uid="uid://bxycsjbmhbgx6" path="res://addons/simusdev/ui/SD_UIControlDrag.gd" id="1_hyvwu"]
+[ext_resource type="Script" uid="uid://d1l1jkmj6s53f" path="res://addons/simusdev/ui/SD_UIInterfaceMenu.gd" id="2_xybdc"]
+[ext_resource type="Script" uid="uid://b63uuflcyfsli" path="res://addons/simusdev/ui/SD_UIConrolDynamicSettings.gd" id="3_ipjjp"]
+[ext_resource type="Script" uid="uid://c2rlqeq2bwvd0" path="res://addons/simusdev/localization/SD_Label.gd" id="5_a4yus"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hyvwu"]
+bg_color = Color(0, 0, 0, 0.8784314)
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g0glb"]
+bg_color = Color(0.056291588, 0.05629161, 0.05629155, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+
+[sub_resource type="GDScript" id="GDScript_hyvwu"]
+resource_name = "script"
+script/source = "extends Button
+
+func _pressed() -> void:
+	SimusDev.popups.close_last_active()
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_ao4vh"]
+font_size = 18
+
+[node name="Base" type="Control" unique_id=588637370]
+custom_minimum_size = Vector2(512, 256)
+layout_mode = 3
+anchor_right = 0.4
+anchor_bottom = 0.35555556
+offset_right = -512.0
+offset_bottom = -256.0
+metadata/_edit_vertical_guides_ = []
+metadata/_edit_horizontal_guides_ = []
+metadata/_edit_use_anchors_ = true
+
+[node name="SE_UIControlDrag" type="Node" parent="." unique_id=2096780630 node_paths=PackedStringArray("TARGET_INPUT", "TARGET_DRAG")]
+script = ExtResource("1_hyvwu")
+TARGET_INPUT = NodePath("..")
+TARGET_DRAG = NodePath("..")
+zoom_enabled = true
+metadata/_custom_type_script = "uid://bxycsjbmhbgx6"
+
+[node name="SD_UIInterfaceMenu" type="Node" parent="." unique_id=972281290 node_paths=PackedStringArray("target")]
+script = ExtResource("2_xybdc")
+target = NodePath("..")
+open_at_start = true
+center_at_start = true
+close_on_escape = false
+metadata/_custom_type_script = "uid://d1l1jkmj6s53f"
+
+[node name="SD_UIControlDynamicSettings" type="Node" parent="." unique_id=2097602628]
+script = ExtResource("3_ipjjp")
+metadata/_custom_type_script = "uid://b63uuflcyfsli"
+
+[node name="Panel" type="Panel" parent="." unique_id=487496878]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hyvwu")
+
+[node name="SD_UIControlDynamicSettings" type="Node" parent="Panel" unique_id=1161035367 node_paths=PackedStringArray("sources")]
+script = ExtResource("3_ipjjp")
+sources = [NodePath("..")]
+metadata/_custom_type_script = "uid://b63uuflcyfsli"
+
+[node name="Head" type="Panel" parent="." unique_id=139772842]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 32.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g0glb")
+
+[node name="close" type="Button" parent="Head" unique_id=1163979800]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+text = "X"
+script = SubResource("GDScript_hyvwu")
+
+[node name="title" type="Label" parent="Head" unique_id=793889512]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 8.0
+offset_bottom = -6.0
+text = "WINDOW"
+label_settings = SubResource("LabelSettings_ao4vh")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+script = ExtResource("5_a4yus")
+custom_settings_enabled = false
+font_size = 18
+metadata/_custom_type_script = "uid://c2rlqeq2bwvd0"
+
+[node name="container" type="Control" parent="." unique_id=720123325]
+layout_mode = 1
+anchor_top = 0.125
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

@@ -42,6 +42,7 @@ enabled=PackedStringArray("res://addons/simusdev/plugin.cfg")
 [gui]
 
 theme/custom="uid://irsceypcejda"
+theme/custom_font="uid://cmcf56bshk847"
 
 [physics]
 
