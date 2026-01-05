@@ -14,6 +14,7 @@ enum CHANNELS {
 	VOICE,
 	USERS,
 	CHAT,
+	INFO_NOTIFICATIONS
 }
 
 const SERVER_ID: int = 1
