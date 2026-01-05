@@ -15,30 +15,22 @@ func _ready() -> void:
 
 func _on_command_executed(command:SD_ConsoleCommand) -> void:
 	match command.get_code():
-		\"notification.send_networked\":
-			if command.get_arguments().size() == GDTalkNotifications.get_method_argument_count(\"send\"):
-				GDTalkNotifications.send(command.get_value_as_string())
-		\"notification.send\":
-			if command.get_arguments().size() == GDTalkNotifications.get_method_argument_count(\"local_send\"):
-				GDTalkNotifications.local_send(command.get_value_as_string())
+		\"info.send_message\":
+			if command.get_arguments().size() == GDTalkInfo.get_method_argument_count(\"send\"):
+				GDTalkInfo.send(command.get_value_as_string())
 "
 
 [sub_resource type="Resource" id="Resource_q8j27"]
 script = ExtResource("2_11aww")
-code = "notification.send"
+code = "info.send_message"
 metadata/_custom_type_script = "uid://bptu8uuecjoc5"
 
-[sub_resource type="Resource" id="Resource_11aww"]
-script = ExtResource("2_11aww")
-code = "notification.send_networked"
-metadata/_custom_type_script = "uid://bptu8uuecjoc5"
-
-[node name="Notifications" type="CanvasLayer" unique_id=2119132578]
+[node name="info" type="CanvasLayer" unique_id=2119132578]
 script = ExtResource("1_ede1q")
 
 [node name="SD_NodeConsoleCommands" type="Node" parent="." unique_id=1636396617]
 script = SubResource("GDScript_511oq")
-commands = Array[ExtResource("2_11aww")]([SubResource("Resource_q8j27"), SubResource("Resource_11aww")])
+commands = Array[ExtResource("2_11aww")]([SubResource("Resource_q8j27")])
 metadata/_custom_type_script = "uid://38osx81mny15"
 
 [node name="Control" type="Control" parent="." unique_id=1002475846]
@@ -52,16 +44,16 @@ mouse_filter = 2
 
 [node name="AttachContainer" type="Control" parent="Control" unique_id=1032319224]
 layout_mode = 1
+anchors_preset = 11
 anchor_left = 1.0
-anchor_top = 0.14400001
 anchor_right = 1.0
-anchor_bottom = 0.878
+anchor_bottom = 1.0
 offset_left = -424.0
-offset_top = 0.31999207
-offset_bottom = -0.16003418
 grow_horizontal = 0
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("2_sjpgd")
-horizontal_align = 1
+separation = 10.0
+animation_duration = 2.5
+display_time = null
 metadata/_custom_type_script = "uid://4esxnjtpdiq0"
