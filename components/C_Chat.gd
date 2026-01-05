@@ -16,6 +16,11 @@ signal on_message_recieve(id: int)
 
 var is_connected: bool = false
 
+var _voice: C_VoiceChannel
+
+func get_voice_channel() -> C_VoiceChannel:
+	return _voice
+
 func get_message_count() -> int:
 	return _messages_count
 
@@ -44,6 +49,11 @@ func _ready() -> void:
 		_client_sync_message,
 		
 	], GDTalk.CHANNELS.CHAT)
+	
+	_voice = C_VoiceChannel.new()
+	_voice.name = "voice"
+	add_child(_voice)
+	_voice.register(self)
 
 func synchronize() -> void:
 	if !SimusNetConnection.is_server():

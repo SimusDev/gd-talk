@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="R_ServerData" format=3]
-
-[ext_resource type="Script" path="res://components/R_ServerData.gd" id="1_hb0ws"]
-
-[resource]
-script = ExtResource("1_hb0ws")
-storage = {
-&"password": "1"
-}
