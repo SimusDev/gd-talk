@@ -12,16 +12,27 @@ func try_host(dedicated: bool = false) -> void:
 		get_tree().change_scene_to_file.call_deferred("res://scenes/dedicated_server.tscn")
 
 func _initialized() -> void:
-	if OS.has_feature("dedicated_server"):
+	if is_going_to_be_dedicated():
 		try_host(true)
 
+func is_going_to_be_dedicated() -> bool:
+	return OS.has_feature("dedicated_server")
+
 func try_connect_to_main() -> void:
-	SimusNetConnectionENet.create_client(
+	if is_going_to_be_dedicated():
+		return
+	
+	var error: Error = SimusNetConnectionENet.create_client(
 		GDTalk.settings.main_server_ip,
 		GDTalk.settings.main_server_port
 		)
+	
+	
 
 func try_connect_to(ip: String) -> void:
+	if is_going_to_be_dedicated():
+		return
+	
 	SD_Console.i().write("connecting... %s:%s" % [ip, GDTalk.settings.main_server_port])
 	SimusNetConnectionENet.create_client(
 		ip,
