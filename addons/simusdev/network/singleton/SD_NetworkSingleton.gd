@@ -148,9 +148,26 @@ func peer_initialize(peer: PacketPeer) -> void:
 		peer_deinitialize()
 	
 	_peer = peer
+
+func _process(delta: float) -> void:
+	if !get_peer():
+		return
+	
+	if get_peer() is OfflineMultiplayerPeer:
+		return
+	
+	if get_peer().get_connection_status() == MultiplayerPeer.ConnectionStatus.CONNECTION_CONNECTED:
+		if !_active:
+			set_active(true)
+			process_mode = Node.PROCESS_MODE_DISABLED
+			
+			if is_server():
+				pass
+	
 	
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	settings = SimusDev.get_settings().network
 	if !settings:
 		settings = SD_NetworkSettings.new()
