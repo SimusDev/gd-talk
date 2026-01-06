@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://dbkytnhuljttt"]
+
+[ext_resource type="PackedScene" uid="uid://k17pdpimwf6p" path="res://interface/popups/base/popup.tscn" id="1_00u8y"]
+[ext_resource type="Script" uid="uid://df2q4bgbgj6sc" path="res://components/smooth_scrollbar.gd" id="2_rdp3u"]
+[ext_resource type="PackedScene" uid="uid://dea6at3bh55ws" path="res://interface/popups/settings/ui_setting.tscn" id="3_o2cbd"]
+[ext_resource type="Texture2D" uid="uid://bhjby7wvwe4q0" path="res://icon.png" id="4_efisv"]
+[ext_resource type="PackedScene" uid="uid://clrq0iw8d5y6l" path="res://interface/screens/account/user_profile.tscn" id="4_ihgd3"]
+
+[node name="Base" unique_id=588637370 instance=ExtResource("1_00u8y")]
+anchor_right = 0.9
+anchor_bottom = 0.8888889
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="title" parent="Head" parent_id_path=PackedInt32Array(139772842) index="1" unique_id=793889512]
+text = "Settings"
+
+[node name="container" parent="." index="5" unique_id=720123325]
+anchors_preset = 15
+anchor_top = 0.0
+offset_top = 32.0
+
+[node name="SmoothScrollContainer" type="ScrollContainer" parent="container" index="0" unique_id=746571840]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.007
+anchor_right = 0.007
+anchor_bottom = 1.0
+offset_left = -0.06400013
+offset_top = 6.8480034
+offset_right = 247.936
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_rdp3u")
+metadata/_custom_type_script = "uid://df2q4bgbgj6sc"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="container/SmoothScrollContainer" index="0" unique_id=968387072]
+layout_mode = 2
+
+[node name="UISetting" parent="container/SmoothScrollContainer/VBoxContainer" index="0" unique_id=309138313 node_paths=PackedStringArray("content_container") instance=ExtResource("3_o2cbd")]
+layout_mode = 2
+content_prefab = ExtResource("4_ihgd3")
+setting_icon = ExtResource("4_efisv")
+setting_name = "User Profile"
+content_container = NodePath("../../../content/Panel")
+
+[node name="content" type="Control" parent="container" index="1" unique_id=2132439699]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 264.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="container/content" index="0" unique_id=1676788721]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

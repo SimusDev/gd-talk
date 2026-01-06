@@ -5,6 +5,8 @@ class_name UI_Avatar
 
 @onready var _icon: TextureRect = $_icon
 
+var msg:R_ChatMessage = null
+
 func set_user(new: C_User) -> void:
 	if is_instance_valid(user):
 		user.on_avatar_changed.disconnect(_changed)
@@ -30,6 +32,9 @@ func _changed() -> void:
 		_icon.texture = user.get_avatar()
 		$star.visible = user.is_admin()
 	else:
-		_icon.texture = null
+		if msg:
+			_icon.texture = msg.avatar
+		else:
+			_icon.texture = null #placeholder
 		$star.visible = false
 		

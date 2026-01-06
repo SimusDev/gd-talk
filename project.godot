@@ -41,6 +41,7 @@ enabled=PackedStringArray("res://addons/simusdev/plugin.cfg")
 
 [gui]
 
+theme/default_font_antialiasing=0
 theme/custom="uid://irsceypcejda"
 theme/custom_font="uid://cmcf56bshk847"
 
@@ -53,3 +54,4 @@ theme/custom_font="uid://cmcf56bshk847"
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+2d/dynamic_fonts/use_oversampling=false

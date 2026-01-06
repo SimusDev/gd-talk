@@ -79,6 +79,9 @@ func _connect_peer(peer: int) -> void:
 	
 	SimusNetVisibility.set_visible_for(peer, self, true)
 	var user: C_User = C_User.find_by_peer_id(peer)
+	if not user:
+		SimusDev.console.write_error("Unable to connect peer [color=aquamarine]%s[/color]" % [peer])
+		return
 	if user.is_local():
 		is_connected = true
 	on_user_connected.emit(user)

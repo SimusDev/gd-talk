@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://bhjby7wvwe4q0" path="res://icon.png" id="6_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://cd2pv4swunf5u" path="res://interface/screens/chat/chat.tscn" id="7_o6xl0"]
 [ext_resource type="Texture2D" uid="uid://wvbghph8kmk7" path="res://addons/simusdev/components/fp_controller/source/icon.png" id="7_tipki"]
+[ext_resource type="Texture2D" uid="uid://c66x8ddudv66m" path="res://addons/simusdev/Game/icons/ui_icon_settings.png" id="9_85g3d"]
+[ext_resource type="PackedScene" uid="uid://dbkytnhuljttt" path="res://interface/popups/settings/popup.tscn" id="9_choun"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sugp2"]
 bg_color = Color(0.05197096, 0.051970966, 0.051970914, 1)
@@ -19,6 +21,9 @@ font_size = 18
 shader = ExtResource("5_tbgi4")
 shader_parameter/radius = 64.0
 shader_parameter/size = Vector2(256, 256)
+shader_parameter/border_enabled = false
+shader_parameter/border_width = 2.0
+shader_parameter/border_color = Color(1, 1, 1, 1)
 
 [sub_resource type="GDScript" id="GDScript_sugp2"]
 resource_name = "main_server_button_script"
@@ -52,6 +57,16 @@ expand_margin_top = 1.0
 expand_margin_right = 1.0
 expand_margin_bottom = 1.0
 anti_aliasing = false
+
+[sub_resource type="GDScript" id="GDScript_85g3d"]
+resource_name = "btn_settings_script"
+script/source = "extends Button
+
+@export var popup:PackedScene
+
+func _pressed() -> void:
+	SD_Popups.create(popup).instantiate()
+"
 
 [node name="Main" type="Control" unique_id=865553199 node_paths=PackedStringArray("_ip")]
 layout_mode = 3
@@ -173,12 +188,11 @@ expand_icon = true
 
 [node name="main_content" type="Control" parent="." unique_id=175973090]
 layout_mode = 1
-anchor_right = 1.001
-anchor_bottom = 1.0
-offset_left = 392.0
-offset_top = 32.0
-offset_right = -9.280029
-offset_bottom = -8.0
+anchor_left = 0.30625
+anchor_top = 0.044444446
+anchor_right = 0.99375
+anchor_bottom = 0.98888886
+metadata/_edit_use_anchors_ = true
 
 [node name="Panel" type="Panel" parent="main_content" unique_id=1139200138]
 layout_mode = 1
@@ -195,13 +209,12 @@ layout_mode = 1
 
 [node name="folders" type="Control" parent="." unique_id=1608286592]
 layout_mode = 1
-anchor_right = 1.001
-anchor_bottom = 1.0
-offset_left = 95.0
-offset_top = 32.0
-offset_right = -890.28
-offset_bottom = -8.0
+anchor_left = 0.07421875
+anchor_top = 0.044444446
+anchor_right = 0.30546874
+anchor_bottom = 0.7111111
 mouse_filter = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="Panel" type="Panel" parent="folders" unique_id=837780010]
 layout_mode = 1
@@ -212,6 +225,58 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_tefeu")
+metadata/_edit_use_anchors_ = true
+
+[node name="user" type="Control" parent="." unique_id=190167695]
+layout_mode = 1
+anchor_left = 0.075
+anchor_top = 0.7222222
+anchor_right = 0.3
+anchor_bottom = 0.98888886
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel" type="Panel" parent="user" unique_id=68583380]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tefeu")
+
+[node name="ButtonSettings" type="Button" parent="user" unique_id=1703057229]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.028
+anchor_top = 0.042000003
+anchor_right = 0.028
+anchor_bottom = 0.042000003
+offset_left = -0.06400013
+offset_top = -0.06400108
+offset_right = 47.936
+offset_bottom = 47.935997
+script = SubResource("GDScript_85g3d")
+popup = ExtResource("9_choun")
+
+[node name="TextureRect" type="TextureRect" parent="user/ButtonSettings" unique_id=1090288964]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.16700001
+anchor_top = 0.16700001
+anchor_right = 0.83300006
+anchor_bottom = 0.83300006
+offset_left = -0.016000748
+offset_top = -0.016000748
+offset_right = 0.01599884
+offset_bottom = 0.01599884
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_85g3d")
+expand_mode = 1
+stretch_mode = 5
 
 [connection signal="pressed" from="VBoxContainer/_create_server" to="." method="_on__create_server_pressed"]
 [connection signal="pressed" from="VBoxContainer/_connect_to_main" to="." method="_on__connect_to_main_pressed"]

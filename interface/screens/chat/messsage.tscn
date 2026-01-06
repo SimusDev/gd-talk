@@ -20,28 +20,42 @@ script = ExtResource("1_j65r7")
 [node name="ui_avatar" parent="." unique_id=1445784157 instance=ExtResource("3_sq56o")]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.13700001
-anchor_bottom = 1.0
-offset_right = -0.14400482
-offset_bottom = 0.0
+anchor_right = 0.094000004
+anchor_bottom = 0.68600005
+offset_top = 8.0
+offset_right = -0.12800217
+offset_bottom = 7.9799957
 
 [node name="UiLoadingAnimation" parent="." unique_id=1349119607 instance=ExtResource("2_b6mma")]
 visible = false
 layout_mode = 1
 
-[node name="SD_RichTextLabel" type="RichTextLabel" parent="." unique_id=1472119849]
+[node name="MessageTextLabel" type="RichTextLabel" parent="." unique_id=1472119849]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.13700001
+anchor_left = 0.125
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -0.14400482
+offset_left = 8.0
+offset_top = 24.0
+offset_bottom = -6.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/normal_font_size = 16
-text = "sex"
-horizontal_alignment = 1
-vertical_alignment = 1
-visible_characters = 2000
+text = "sexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsexsex"
 script = ExtResource("4_87jr0")
 metadata/_custom_type_script = "uid://7a6v13hisjmu"
+
+[node name="UserNameLabel" type="RichTextLabel" parent="." unique_id=176009126]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.141
+anchor_right = 0.141
+offset_left = -0.19200134
+offset_right = 439.80798
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[font_size=24]username[/font_size]"
+scroll_active = false

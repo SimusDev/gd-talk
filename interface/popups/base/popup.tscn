@@ -6,12 +6,12 @@
 [ext_resource type="Script" uid="uid://c2rlqeq2bwvd0" path="res://addons/simusdev/localization/SD_Label.gd" id="5_a4yus"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hyvwu"]
-bg_color = Color(0, 0, 0, 0.8784314)
+bg_color = Color(0.14767182, 0.14767179, 0.14767179, 1)
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g0glb"]
-bg_color = Color(0.056291588, 0.05629161, 0.05629155, 1)
+bg_color = Color(0.103743516, 0.103743546, 0.10374347, 1)
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 
@@ -66,11 +66,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_hyvwu")
-
-[node name="SD_UIControlDynamicSettings" type="Node" parent="Panel" unique_id=1161035367 node_paths=PackedStringArray("sources")]
-script = ExtResource("3_ipjjp")
-sources = [NodePath("..")]
-metadata/_custom_type_script = "uid://b63uuflcyfsli"
 
 [node name="Head" type="Panel" parent="." unique_id=139772842]
 layout_mode = 1

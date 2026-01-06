@@ -1,0 +1,150 @@
+[gd_scene format=3 uid="uid://clrq0iw8d5y6l"]
+
+[ext_resource type="Theme" uid="uid://bu5140stldhdf" path="res://resources/themes/main.tres" id="1_jho6y"]
+[ext_resource type="Shader" uid="uid://ok5sp7xdctqq" path="res://resources/shaders/circle.gdshader" id="2_h8prn"]
+[ext_resource type="Texture2D" uid="uid://cxp8kgcswastu" path="res://icon.svg" id="3_k7pcv"]
+[ext_resource type="Script" uid="uid://df2q4bgbgj6sc" path="res://components/smooth_scrollbar.gd" id="4_24l38"]
+[ext_resource type="PackedScene" uid="uid://fbdb2ooek758" path="res://interface/avatar/ui_avatar_file_dialog.tscn" id="5_h8prn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rrwrq"]
+shader = ExtResource("2_h8prn")
+shader_parameter/radius = 128.0
+shader_parameter/size = Vector2(256, 256)
+shader_parameter/border_enabled = true
+shader_parameter/border_width = 2.0
+shader_parameter/border_color = Color(0.80049086, 0.80049074, 0.80049074, 1)
+
+[sub_resource type="GDScript" id="GDScript_h8prn"]
+resource_name = "script"
+script/source = "extends TextureRect
+
+func _ready() -> void:
+	if not C_User.get_local():
+		await GDTalk.pkg_auth.on_success
+	C_User.get_local().on_avatar_changed.connect(_update)
+
+func _update() -> void:
+	texture = C_User.get_local().get_avatar()
+"
+
+[sub_resource type="GDScript" id="GDScript_jho6y"]
+resource_name = "script"
+script/source = "extends Button
+
+@export var file_dialog:UI_AvatarFileDialog
+
+func _ready() -> void:
+	file_dialog.on_image_selected.connect(_on_avatar_file_dialog_on_image_selected)
+
+func _pressed() -> void:
+	file_dialog.popup()
+
+func _on_avatar_file_dialog_on_image_selected(image: Image) -> void:
+	if C_User.get_local():
+		C_User.get_local().set_avatar(image)
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jho6y"]
+bg_color = Color(0.5717837, 0.60342085, 0.6481997, 1)
+draw_center = false
+border_width_top = 1
+border_color = Color(0.6052743, 0.6052744, 0.6052741, 1)
+
+[node name="UserProfile" type="Control" unique_id=2076952876]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_jho6y")
+
+[node name="Panel" type="Panel" parent="." unique_id=62621153]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_top = 0.056
+anchor_right = 0.75000006
+anchor_bottom = 0.94400007
+offset_top = -0.3199997
+offset_right = -6.1035156e-05
+offset_bottom = 0.3199463
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UserAvatar" type="TextureRect" parent="." unique_id=1278628784]
+material = SubResource("ShaderMaterial_rrwrq")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.26200002
+anchor_top = 0.1
+anchor_right = 0.37
+anchor_bottom = 0.29200003
+offset_left = 0.6399536
+offset_right = 0.3999939
+offset_bottom = -0.24002075
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_k7pcv")
+expand_mode = 1
+stretch_mode = 5
+script = SubResource("GDScript_h8prn")
+
+[node name="Button" type="Button" parent="UserAvatar" unique_id=2092476020 node_paths=PackedStringArray("file_dialog")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.7173913
+anchor_right = 1.0
+anchor_bottom = 0.7173913
+offset_left = 16.0
+offset_right = 118.0
+offset_bottom = 22.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Change"
+script = SubResource("GDScript_jho6y")
+file_dialog = NodePath("../../AvatarFileDialog")
+metadata/_edit_use_anchors_ = true
+
+[node name="SmoothScrollContainer" type="ScrollContainer" parent="." unique_id=1577972851]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.24900001
+anchor_top = 0.333
+anchor_right = 0.75000006
+anchor_bottom = 0.933
+offset_left = 9.279968
+offset_top = 0.23999023
+offset_right = -8.000061
+offset_bottom = 0.23999023
+script = ExtResource("4_24l38")
+metadata/_custom_type_script = "uid://df2q4bgbgj6sc"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SmoothScrollContainer" unique_id=26074205]
+layout_mode = 2
+
+[node name="UserNameEdit" type="LineEdit" parent="SmoothScrollContainer/VBoxContainer" unique_id=1447397188]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "username"
+placeholder_text = "username:"
+max_length = 34
+caret_blink = true
+
+[node name="Separate" type="Panel" parent="." unique_id=270591696]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_top = 0.31100002
+anchor_right = 0.75100005
+anchor_bottom = 0.32200003
+offset_left = 8.0
+offset_top = 0.07998657
+offset_right = -9.280029
+offset_bottom = 0.15997314
+theme_override_styles/panel = SubResource("StyleBoxFlat_jho6y")
+
+[node name="AvatarFileDialog" parent="." unique_id=202652692 instance=ExtResource("5_h8prn")]
+filters = PackedStringArray("*.png", "*.jpg", "*.jpeg")
