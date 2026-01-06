@@ -50,6 +50,14 @@ func serialize() -> Array:
 	
 	return result
 
+static func deserialize(data: Array) -> R_ChatMessage:
+	var message := R_ChatMessage.new()
+	message.type = data[0]
+	message._interface = _INTERFACES.get(message.type)
+	message.data = data[1]
+	message.sender = data[2]
+	return message
+
 static func serialize_array(array: Array[R_ChatMessage]) -> PackedByteArray:
 	var result: Array = []
 	for i in array:
@@ -62,11 +70,3 @@ static func deserialize_array(array: PackedByteArray) -> Array[R_ChatMessage]:
 	for i in serialized:
 		result.append(deserialize(i))
 	return result
-
-static func deserialize(data: Array) -> R_ChatMessage:
-	var message := R_ChatMessage.new()
-	message.type = data[0]
-	message._interface = _INTERFACES.get(message.type)
-	message.data = data[1]
-	message.sender = data[2]
-	return message

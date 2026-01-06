@@ -15,7 +15,6 @@ static func get_scene() -> PackedScene:
 
 func _ready() -> void:
 	chat.on_message_synchronized.connect(_on_sync)
-	chat.synchronize_message(id)
 	GDTalk.pkg_users.on_user_connected.connect(_on_user_connected)
 
 func _on_user_connected(user: C_User) -> void:
@@ -25,9 +24,12 @@ func _on_user_connected(user: C_User) -> void:
 	if user.login == resource.sender:
 		$ui_avatar.user = user
 
+var _synced: bool = false
 func _on_sync(_id: int, msg: R_ChatMessage) -> void:
-	if id != _id:
+	if id != _id or _synced:
 		return
+	
+	_synced = true
 	
 	resource = msg
 	
@@ -44,3 +46,9 @@ func _on_sync(_id: int, msg: R_ChatMessage) -> void:
 	
 	user_name_label.text = "[font_size=24]%s[/font_size]" % str(msg.username)
 	message_text_label.text = str(msg.data)
+
+
+func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
+	if _synced:
+		return
+	chat.synchronize_message(id)
