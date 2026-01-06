@@ -109,16 +109,18 @@ func _processor_recieve_rpc_from_peer(peer: int, channel: int, serialized_identi
 		return
 	
 	var args: Array = []
-	if serialized_args is Array:
-		for s in serialized_args:
-			args.append(SimusNetSerializer.parse(s, config._serialization))
+	var deserialized: Variant = SimusNetDeserializer.parse(serialized_args, config._serialization)
+	
+	if deserialized is Array:
+		args.append_array(deserialized)
 	else:
-		args = [args]
+		args.append(deserialized)
 	
 	var callable: Callable
 	
 	if peer == SimusNetConnection.SERVER_ID:
-		object.callv(method_name, args)
+		if object.has_method(method_name):
+			object.callv(method_name, args)
 		return
 	
 	var validated_config: SimusNetRPCConfig = await _validate_callable(config.callable)

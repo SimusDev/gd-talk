@@ -193,7 +193,8 @@ static func get_cached_unique_ids() -> Dictionary[int, Variant]:
 static func get_cached_unique_ids_values() -> Dictionary[Variant, int]:
 	return SimusNetCache.data_get_or_add("i.uidv", {} as Dictionary[Variant, int])
 
-static func try_find_in(object: Object) -> SimusNetIdentity:
-	if object.has_meta("SimusNetIdentity"):
-		return object.get_meta("SimusNetIdentity")
+static func try_find_in(object: Variant) -> SimusNetIdentity:
+	if object is Object:
+		if object.has_meta("SimusNetIdentity"):
+			return object.get_meta("SimusNetIdentity")
 	return null
