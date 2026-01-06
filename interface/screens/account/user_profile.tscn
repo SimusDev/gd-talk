@@ -22,6 +22,7 @@ func _ready() -> void:
 	if not C_User.get_local():
 		await GDTalk.pkg_auth.on_success
 	C_User.get_local().on_avatar_changed.connect(_update)
+	_update()
 
 func _update() -> void:
 	texture = C_User.get_local().get_avatar()
