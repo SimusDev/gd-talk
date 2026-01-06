@@ -45,7 +45,7 @@ func _on_sync(_id: int, msg: R_ChatMessage) -> void:
 		msg.username = msg.sender
 		$ui_avatar.set_texture(C_User.get_user_avatar(msg.sender))
 	
-	user_name_label.text = "[font_size=24]%s[/font_size]" % str(msg.username)
+	user_name_label.text = "[font_size=24]%s[/font_size]" % str( msg.sender )
 	message_text_label.text = str(msg.data)
 
 

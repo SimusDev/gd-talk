@@ -53,10 +53,12 @@ script/source = "extends Button
 @export_file var ui_scene:String
 
 func _pressed() -> void:
-	GDTalk.pkg_auth.clear_login()
-	GDTalk.pkg_auth.clear_password()
 	if load(ui_scene):
+		GDTalk.pkg_auth.clear_login()
+		GDTalk.pkg_auth.clear_password()
+		GDTalk.global_chat.request_disconnect()
 		get_tree().change_scene_to_file(ui_scene)
+		SimusDev.popups.close_last_active()
 "
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jho6y"]

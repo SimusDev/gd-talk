@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://wvbghph8kmk7" path="res://addons/simusdev/components/fp_controller/source/icon.png" id="7_tipki"]
 [ext_resource type="Texture2D" uid="uid://c66x8ddudv66m" path="res://addons/simusdev/Game/icons/ui_icon_settings.png" id="9_85g3d"]
 [ext_resource type="PackedScene" uid="uid://dbkytnhuljttt" path="res://interface/popups/settings/popup.tscn" id="9_choun"]
+[ext_resource type="Script" uid="uid://851bhpxqx0n8" path="res://addons/simusdev/localization/SD_RichTextLabelSimple.gd" id="11_ya4ey"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sugp2"]
 bg_color = Color(0.05197096, 0.051970966, 0.051970914, 1)
@@ -274,6 +275,17 @@ grow_vertical = 2
 texture = ExtResource("9_85g3d")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="SD_RichTextLabelSimple" type="RichTextLabel" parent="." unique_id=1638246339]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 16
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("11_ya4ey")
+metadata/_custom_type_script = "uid://851bhpxqx0n8"
 
 [connection signal="pressed" from="Control/VBoxContainer/_create_server" to="." method="_on__create_server_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/_connect_to_main" to="." method="_on__connect_to_main_pressed"]

@@ -54,6 +54,8 @@ offset_top = -33.0
 grow_horizontal = 2
 grow_vertical = 2
 placeholder_text = "ENTER TEXT HERE..."
+keep_editing_on_text_submit = true
+deselect_on_focus_loss_enabled = false
 
 [connection signal="on_changed" from="C_IVisibilityListener" to="." method="_on_c_i_visibility_listener_on_changed"]
 [connection signal="text_submitted" from="LineEdit" to="." method="_on_line_edit_text_submitted"]
