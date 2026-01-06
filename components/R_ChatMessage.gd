@@ -40,7 +40,7 @@ static func create(from: Variant, user: C_User = null) -> R_ChatMessage:
 	
 	return message
 
-func serialize() -> Array:
+func serialize() -> PackedByteArray:
 	var result: Array = []
 	result.append_array([
 		type,
@@ -48,14 +48,15 @@ func serialize() -> Array:
 		sender,
 	])
 	
-	return result
+	return SimusNetCompressor.parse(result)
 
-static func deserialize(data: Array) -> R_ChatMessage:
+static func deserialize(bytes: PackedByteArray) -> R_ChatMessage:
+	var _data: Array = SimusNetDecompressor.parse(bytes)
 	var message := R_ChatMessage.new()
-	message.type = data[0]
+	message.type = _data[0]
 	message._interface = _INTERFACES.get(message.type)
-	message.data = data[1]
-	message.sender = data[2]
+	message.data = _data[1]
+	message.sender = _data[2]
 	return message
 
 static func serialize_array(array: Array[R_ChatMessage]) -> PackedByteArray:
