@@ -28,6 +28,8 @@ func _ready() -> void:
 	_changed()
 
 func _changed() -> void:
+	$star.visible = false
+	
 	if is_instance_valid(user):
 		_icon.texture = user.get_avatar()
 		$star.visible = user.is_admin()
