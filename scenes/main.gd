@@ -23,7 +23,3 @@ func _on__connect_pressed() -> void:
 
 func _on__connect_to_main_pressed() -> void:
 	GDTalk.pkg_server.try_connect_to_main()
-
-
-func _on_gui_input(event: InputEvent) -> void:
-	pass # Replace with function body.

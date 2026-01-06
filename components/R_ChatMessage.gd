@@ -14,8 +14,6 @@ const _INTERFACES: Dictionary[int, PackedScene] = {
 }
 
 var sender: String = ""
-var avatar: Texture = null
-var username: String = ""
 var data: Variant
 
 var _interface: PackedScene
