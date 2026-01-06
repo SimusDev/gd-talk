@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dkimojnf3m16d"]
+
+[node name="LoginEdit" type="LineEdit" unique_id=1929725467]
+custom_minimum_size = Vector2(250, 0)
+size_flags_horizontal = 4
+placeholder_text = "login:"
+alignment = 1
+max_length = 34
+caret_blink = true

@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://c13immn16v0i4"]
+
+[node name="UserNameEdit" type="LineEdit" unique_id=478390474]
+custom_minimum_size = Vector2(250, 0)
+size_flags_horizontal = 4
+text = "username"
+placeholder_text = "username:"
+max_length = 34
+caret_blink = true

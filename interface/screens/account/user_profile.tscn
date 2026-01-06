@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cxp8kgcswastu" path="res://icon.svg" id="3_k7pcv"]
 [ext_resource type="Script" uid="uid://df2q4bgbgj6sc" path="res://components/smooth_scrollbar.gd" id="4_24l38"]
 [ext_resource type="PackedScene" uid="uid://fbdb2ooek758" path="res://interface/avatar/ui_avatar_file_dialog.tscn" id="5_h8prn"]
+[ext_resource type="PackedScene" uid="uid://c13immn16v0i4" path="res://interface/screens/user_name_edit.tscn" id="5_k7pcv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rrwrq"]
 shader = ExtResource("2_h8prn")
@@ -45,10 +46,26 @@ func _on_avatar_file_dialog_on_image_selected(image: Image) -> void:
 		C_User.get_local().set_avatar(image)
 "
 
+[sub_resource type="GDScript" id="GDScript_k7pcv"]
+resource_name = "script"
+script/source = "extends Button
+
+@export_file(\"*.scn *.tscn\") var ui_scene:String
+
+func _pressed() -> void:
+	get_tree().change_scene_to_file(ui_scene)
+"
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jho6y"]
 bg_color = Color(0.5717837, 0.60342085, 0.6481997, 1)
 draw_center = false
 border_width_top = 1
+border_color = Color(0.6052743, 0.6052744, 0.6052741, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h8prn"]
+bg_color = Color(0.5717837, 0.60342085, 0.6481997, 1)
+draw_center = false
+border_width_left = 1
 border_color = Color(0.6052743, 0.6052744, 0.6052741, 1)
 
 [node name="UserProfile" type="Control" unique_id=2076952876]
@@ -94,13 +111,14 @@ script = SubResource("GDScript_h8prn")
 [node name="Button" type="Button" parent="UserAvatar" unique_id=2092476020 node_paths=PackedStringArray("file_dialog")]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 1.0
-anchor_top = 0.7173913
-anchor_right = 1.0
-anchor_bottom = 0.7173913
+anchor_left = 0.8695652
+anchor_top = 0.7532319
+anchor_right = 0.8695652
+anchor_bottom = 0.7532319
 offset_left = 16.0
+offset_top = 0.054000854
 offset_right = 118.0
-offset_bottom = 22.0
+offset_bottom = 22.054
 grow_horizontal = 2
 grow_vertical = 2
 text = "Change"
@@ -125,14 +143,16 @@ metadata/_custom_type_script = "uid://df2q4bgbgj6sc"
 [node name="VBoxContainer" type="VBoxContainer" parent="SmoothScrollContainer" unique_id=26074205]
 layout_mode = 2
 
-[node name="UserNameEdit" type="LineEdit" parent="SmoothScrollContainer/VBoxContainer" unique_id=1447397188]
-custom_minimum_size = Vector2(250, 0)
+[node name="UserNameEdit" parent="SmoothScrollContainer/VBoxContainer" unique_id=478390474 instance=ExtResource("5_k7pcv")]
 layout_mode = 2
-size_flags_horizontal = 4
-text = "username"
-placeholder_text = "username:"
-max_length = 34
-caret_blink = true
+
+[node name="ButtonLogOut" type="Button" parent="SmoothScrollContainer/VBoxContainer" unique_id=211831913]
+self_modulate = Color(1, 0.5336117, 0.4686132, 1)
+custom_minimum_size = Vector2(120, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Logout"
+script = SubResource("GDScript_k7pcv")
 
 [node name="Separate" type="Panel" parent="." unique_id=270591696]
 layout_mode = 1
@@ -146,6 +166,17 @@ offset_top = 0.07998657
 offset_right = -9.280029
 offset_bottom = 0.15997314
 theme_override_styles/panel = SubResource("StyleBoxFlat_jho6y")
+
+[node name="Separate2" type="Panel" parent="." unique_id=605588265]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.055555556
+anchor_right = 0.5128203
+anchor_bottom = 0.31111112
+offset_bottom = -1.5258789e-05
+theme_override_styles/panel = SubResource("StyleBoxFlat_h8prn")
+metadata/_edit_use_anchors_ = true
 
 [node name="AvatarFileDialog" parent="." unique_id=202652692 instance=ExtResource("5_h8prn")]
 filters = PackedStringArray("*.png", "*.jpg", "*.jpeg")

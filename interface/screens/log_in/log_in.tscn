@@ -1,0 +1,147 @@
+[gd_scene format=3 uid="uid://dvnukciexgjsa"]
+
+[ext_resource type="Theme" uid="uid://bu5140stldhdf" path="res://resources/themes/main.tres" id="1_ruumq"]
+[ext_resource type="PackedScene" uid="uid://dkimojnf3m16d" path="res://interface/screens/login_edit.tscn" id="2_gu21f"]
+[ext_resource type="PackedScene" uid="uid://bundx5mdnxd8m" path="res://interface/screens/password_edit.tscn" id="3_8upbg"]
+[ext_resource type="Script" uid="uid://851bhpxqx0n8" path="res://addons/simusdev/localization/SD_RichTextLabelSimple.gd" id="4_abikg"]
+[ext_resource type="PackedScene" uid="uid://bbo6fhliu2ml" path="res://interface/loading/ui_loading_animation.tscn" id="5_8upbg"]
+
+[sub_resource type="GDScript" id="GDScript_gu21f"]
+resource_name = "script"
+script/source = "extends Button
+
+@export_file(\"*.scn *.tscn\") var main_scene:String = \"res://scenes/main.tscn\"
+
+@onready var v_box_container: VBoxContainer = $\"..\"
+@onready var ui_loading_animation: UI_LoadingAnimation = $\"../../UiLoadingAnimation\"
+@onready var login_edit: LineEdit = $\"../LoginEdit\"
+@onready var password_edit: LineEdit = $\"../PasswordEdit\"
+@onready var label_info: SD_RichTextLabelSimple = $\"../LabelInfo\"
+
+func _ready() -> void:
+	GDTalk.pkg_server.try_connect_to_main()
+	await SimusNetEvents.event_connected.published
+	
+	
+	GDTalk.pkg_auth.on_success.connect(_on_success)
+	GDTalk.pkg_auth.on_error.connect(_on_error)
+
+	if GDTalk.pkg_auth.get_last_login() and GDTalk.pkg_auth.get_last_password():
+		v_box_container.hide()
+		ui_loading_animation.show()
+		GDTalk.pkg_auth.request(
+			GDTalk.pkg_auth.get_last_login(),
+			GDTalk.pkg_auth.get_last_password()
+		)
+
+func _on_process_start() -> void:
+	disabled = true
+
+func _on_process_finish() -> void:
+	disabled = false
+
+func _on_success() -> void:
+	disabled = false
+	get_tree().change_scene_to_file(main_scene)
+
+
+func _on_error(_error:String) -> void:
+	v_box_container.show()
+	ui_loading_animation.hide()
+	label_info.localization_key = _error
+	disabled = false
+	SimusDev.console.write_error(_error)
+
+func _pressed() -> void:
+	disabled = true
+	GDTalk.pkg_auth.request(
+		login_edit.text,
+		password_edit.text
+	)
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_7j464"]
+font_size = 18
+
+[node name="LogIn" type="Control" unique_id=1785164697]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ruumq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=598384134]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="LoginEdit" parent="VBoxContainer" unique_id=1929725467 instance=ExtResource("2_gu21f")]
+layout_mode = 2
+
+[node name="PasswordEdit" parent="VBoxContainer" unique_id=830439283 instance=ExtResource("3_8upbg")]
+layout_mode = 2
+
+[node name="ButtonLogIn" type="Button" parent="VBoxContainer" unique_id=1309205806]
+custom_minimum_size = Vector2(250, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "log in"
+script = SubResource("GDScript_gu21f")
+
+[node name="LabelInfo" type="RichTextLabel" parent="VBoxContainer" unique_id=1722107272]
+self_modulate = Color(1, 0, 0, 1)
+custom_minimum_size = Vector2(1000, 250)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+scroll_active = false
+shortcut_keys_enabled = false
+horizontal_alignment = 1
+script = ExtResource("4_abikg")
+localization_enabled = true
+metadata/_custom_type_script = "uid://851bhpxqx0n8"
+
+[node name="App-Name" type="Label" parent="." unique_id=1589187669]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "GD-Talk"
+label_settings = SubResource("LabelSettings_7j464")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="RichTextLabel" parent="." unique_id=227889267]
+layout_mode = 0
+anchor_left = 0.3
+anchor_top = 0.08888889
+anchor_right = 0.7
+anchor_bottom = 0.35555556
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "Enter your login and password, then press [font_size=20]log in[/font_size]
+[color=gray]Account will be automatically created if it doesn't exist.[/color]"
+scroll_active = false
+shortcut_keys_enabled = false
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_abikg")
+metadata/_custom_type_script = "uid://851bhpxqx0n8"
+metadata/_edit_use_anchors_ = true
+
+[node name="UiLoadingAnimation" parent="." unique_id=1349119607 instance=ExtResource("5_8upbg")]
+visible = false
+layout_mode = 1

@@ -11,8 +11,9 @@ config_version=5
 [application]
 
 config/name="GDTalk"
-run/main_scene="uid://dkv3xq43kebc"
+run/main_scene="uid://dvnukciexgjsa"
 config/features=PackedStringArray("4.6", "GL Compatibility")
+boot_splash/bg_color=Color(0.050980393, 0.050980393, 0.050980393, 1)
 boot_splash/show_image=false
 config/icon="uid://bhjby7wvwe4q0"
 
@@ -24,8 +25,8 @@ driver/enable_input=true
 
 SimusDev="*uid://cvfrshw18g5he"
 GDTalk="*uid://cnp4334xekn7g"
-GDTalkInfo="*uid://dh67lrywu16oa"
 GDTalkNotifications="*uid://mvaw0u6eaab3"
+GDTalkInfo="*uid://dh67lrywu16oa"
 
 [display]
 
@@ -55,4 +56,5 @@ theme/custom_font="uid://cmcf56bshk847"
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.050980393, 0.050980393, 0.050980393, 1)
 2d/dynamic_fonts/use_oversampling=false
