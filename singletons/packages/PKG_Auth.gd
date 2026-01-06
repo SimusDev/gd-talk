@@ -9,11 +9,19 @@ signal on_server_login(peer: int, login: String, password: String)
 @onready var _cmd_login: SD_ConsoleCommand = SD_ConsoleCommand.get_or_create("gdtalk.login", "user")
 @onready var _cmd_password: SD_ConsoleCommand = SD_ConsoleCommand.get_or_create("gdtalk.password", "")
 
+var is_authentificated: bool = false
+
 func get_last_login() -> String:
 	return _cmd_login.get_value_as_string()
 
 func get_last_password() -> String:
 	return _cmd_password.get_value_as_string()
+
+func clear_login() -> void:
+	_cmd_login.set_value("")
+
+func clear_password() -> void:
+	_cmd_password.set_value("")
 
 func _initialized() -> void:
 	SimusNetRPCGodot.register([
@@ -71,4 +79,7 @@ func _send_error(error: String) -> void:
 	on_error.emit(error)
 
 func _send_success() -> void:
+	is_authentificated = true
 	on_success.emit()
+	print(1)
+	
