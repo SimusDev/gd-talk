@@ -3,6 +3,8 @@ class_name C_VoiceChannel
 
 var _chat: C_Chat
 
+@onready var _visibility: SimusNetVisible = SimusNetVisible.get_or_create(self).set_public_visibility(false)
+
 func register(chat: C_Chat) -> void:
 	_chat = chat
 	_chat.on_user_connected.connect(_on_user_connected)
