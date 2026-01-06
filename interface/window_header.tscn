@@ -1,0 +1,141 @@
+[gd_scene format=3 uid="uid://b1bgf4i8hljvu"]
+
+[ext_resource type="Script" uid="uid://c2rlqeq2bwvd0" path="res://addons/simusdev/localization/SD_Label.gd" id="1_qygaw"]
+
+[sub_resource type="GDScript" id="GDScript_bj6ho"]
+resource_name = "script"
+script/source = "extends Control
+
+var following = false
+var dragging_start_position = Vector2()
+
+func _on_gui_input(event):
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		following = event.pressed
+		dragging_start_position = get_viewport().get_mouse_position()
+	print(\"SEX\")
+func _process(_delta):
+	if following:
+		var current_mouse_pos = DisplayServer.mouse_get_position()
+		DisplayServer.window_set_position(current_mouse_pos - Vector2i(dragging_start_position))
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b0b6l"]
+bg_color = Color(0.103743516, 0.103743546, 0.10374347, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qygaw"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lguni"]
+bg_color = Color(0.9999296, 0.45248365, 0.38403323, 1)
+
+[sub_resource type="GDScript" id="GDScript_lguni"]
+resource_name = "script"
+script/source = "extends Button
+
+func _pressed() -> void:
+	get_tree().quit()
+"
+
+[sub_resource type="GDScript" id="GDScript_qygaw"]
+resource_name = "script"
+script/source = "extends Button
+
+func _pressed() -> void:
+	if get_window().mode == Window.MODE_WINDOWED:
+		get_window().set_mode(Window.MODE_FULLSCREEN)
+	elif get_window().mode == Window.MODE_FULLSCREEN:
+		get_window().set_mode(Window.MODE_WINDOWED)
+"
+
+[sub_resource type="GDScript" id="GDScript_b0b6l"]
+resource_name = "script"
+script/source = "extends Button
+
+func _pressed() -> void:
+	get_window().set_mode(Window.MODE_MINIMIZED)
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_bj6ho"]
+font_size = 18
+
+[node name="WindowHeader" type="Control" unique_id=1879313426]
+custom_minimum_size = Vector2(1280, 32)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -688.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = SubResource("GDScript_bj6ho")
+
+[node name="Head" type="Panel" parent="." unique_id=135193098]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_b0b6l")
+
+[node name="close" type="Button" parent="Head" unique_id=993345872]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -32.0
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qygaw")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lguni")
+text = "x"
+script = SubResource("GDScript_lguni")
+
+[node name="maximize" type="Button" parent="Head" unique_id=1896982587]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_right = -32.0
+text = "[]"
+script = SubResource("GDScript_qygaw")
+metadata/_edit_use_anchors_ = true
+
+[node name="minimize" type="Button" parent="Head" unique_id=1371137282]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_right = -64.0
+text = "-"
+script = SubResource("GDScript_b0b6l")
+metadata/_edit_use_anchors_ = true
+
+[node name="title" type="Label" parent="Head" unique_id=1434732060]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 8.0
+offset_bottom = -6.0
+text = "WINDOW"
+label_settings = SubResource("LabelSettings_bj6ho")
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+script = ExtResource("1_qygaw")
+custom_settings_enabled = false
+font_size = 18
+metadata/_custom_type_script = "uid://c2rlqeq2bwvd0"
+metadata/_edit_lock_ = true
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

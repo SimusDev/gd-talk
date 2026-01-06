@@ -26,7 +26,6 @@ driver/enable_input=true
 SimusDev="*uid://cvfrshw18g5he"
 GDTalk="*uid://cnp4334xekn7g"
 GDTalkNotifications="*uid://mvaw0u6eaab3"
-GDTalkInfo="*uid://dh67lrywu16oa"
 
 [display]
 

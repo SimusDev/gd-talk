@@ -31,18 +31,6 @@ script/source = "extends Button
 
 func _pressed() -> void:
 	if not GDTalk.global_chat.is_connected:
-		GDTalk.pkg_server.try_connect_to_main()
-		
-		await SimusNetEvents.event_connected.published
-		await GDTalk.for_async_synchronize()
-		
-		##auth
-		GDTalk.pkg_auth.request(
-			GDTalk.pkg_auth.get_last_login(),
-			GDTalk.pkg_auth.get_last_password()
-			)
-		##
-		
 		if !GDTalk.pkg_auth.is_authentificated:
 			await GDTalk.pkg_auth.on_success
 		
@@ -78,12 +66,22 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme = ExtResource("1_sugp2")
 script = ExtResource("1_o5qli")
-_ip = NodePath("VBoxContainer/_ip")
+_ip = NodePath("Control/VBoxContainer/_ip")
 metadata/_edit_horizontal_guides_ = [118.0]
 
-[node name="Panel" type="Panel" parent="." unique_id=824574383]
+[node name="Control" type="Control" parent="." unique_id=1232886975]
+custom_minimum_size = Vector2(0, 688)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Control" unique_id=824574383]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -92,7 +90,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_sugp2")
 
-[node name="App-Name" type="Label" parent="." unique_id=1311156295]
+[node name="App-Name" type="Label" parent="Control" unique_id=1311156295]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -104,56 +102,56 @@ label_settings = SubResource("LabelSettings_0wfyh")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=980102914]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=980102914]
 layout_mode = 0
 offset_left = 148.0
 offset_top = 102.0
 offset_right = 345.0
 offset_bottom = 448.0
 
-[node name="_create_server" type="Button" parent="VBoxContainer" unique_id=1473437049]
+[node name="_create_server" type="Button" parent="Control/VBoxContainer" unique_id=1473437049]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 text = "Create Server"
 
-[node name="SD_NodeLocalizatorProperty" type="Node" parent="VBoxContainer/_create_server" unique_id=1372196587 node_paths=PackedStringArray("node")]
+[node name="SD_NodeLocalizatorProperty" type="Node" parent="Control/VBoxContainer/_create_server" unique_id=1372196587 node_paths=PackedStringArray("node")]
 process_mode = 4
 script = ExtResource("2_0wfyh")
 node = NodePath("..")
 key = &"gdtalk.create_server"
 metadata/_custom_type_script = "uid://buo415nhjgsrx"
 
-[node name="_connect_to_main" type="Button" parent="VBoxContainer" unique_id=1779198180]
+[node name="_connect_to_main" type="Button" parent="Control/VBoxContainer" unique_id=1779198180]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 text = "Connect to main server"
 
-[node name="SD_NodeLocalizatorProperty" type="Node" parent="VBoxContainer/_connect_to_main" unique_id=854848103 node_paths=PackedStringArray("node")]
+[node name="SD_NodeLocalizatorProperty" type="Node" parent="Control/VBoxContainer/_connect_to_main" unique_id=854848103 node_paths=PackedStringArray("node")]
 process_mode = 4
 script = ExtResource("2_0wfyh")
 node = NodePath("..")
 key = &"gdtalk.connect_to_main"
 metadata/_custom_type_script = "uid://buo415nhjgsrx"
 
-[node name="_connect" type="Button" parent="VBoxContainer" unique_id=2099486153]
+[node name="_connect" type="Button" parent="Control/VBoxContainer" unique_id=2099486153]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 text = "Connect"
 
-[node name="SD_NodeLocalizatorProperty" type="Node" parent="VBoxContainer/_connect" unique_id=211990861 node_paths=PackedStringArray("node")]
+[node name="SD_NodeLocalizatorProperty" type="Node" parent="Control/VBoxContainer/_connect" unique_id=211990861 node_paths=PackedStringArray("node")]
 process_mode = 4
 script = ExtResource("2_0wfyh")
 node = NodePath("..")
 key = &"gdtalk.connect"
 metadata/_custom_type_script = "uid://buo415nhjgsrx"
 
-[node name="_ip" type="LineEdit" parent="VBoxContainer" unique_id=1142206353]
+[node name="_ip" type="LineEdit" parent="Control/VBoxContainer" unique_id=1142206353]
 layout_mode = 2
 text = "localhost"
 placeholder_text = "IP"
 alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=824221114]
+[node name="ScrollContainer" type="ScrollContainer" parent="Control" unique_id=824221114]
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
@@ -166,10 +164,10 @@ horizontal_scroll_mode = 3
 vertical_scroll_mode = 3
 script = ExtResource("4_jyhfs")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="ScrollContainer" unique_id=99423524]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/ScrollContainer" unique_id=99423524]
 layout_mode = 2
 
-[node name="MainServerButton" type="Button" parent="ScrollContainer/VBoxContainer2" unique_id=730704524]
+[node name="MainServerButton" type="Button" parent="Control/ScrollContainer/VBoxContainer2" unique_id=730704524]
 material = SubResource("ShaderMaterial_tefeu")
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
@@ -179,7 +177,7 @@ icon_alignment = 1
 expand_icon = true
 script = SubResource("GDScript_sugp2")
 
-[node name="ls" type="Button" parent="ScrollContainer/VBoxContainer2" unique_id=1658441330]
+[node name="ls" type="Button" parent="Control/ScrollContainer/VBoxContainer2" unique_id=1658441330]
 material = SubResource("ShaderMaterial_tefeu")
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
@@ -188,15 +186,14 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="main_content" type="Control" parent="." unique_id=175973090]
+[node name="main_content" type="Control" parent="Control" unique_id=175973090]
 layout_mode = 1
 anchor_left = 0.30625
 anchor_top = 0.044444446
 anchor_right = 0.99375
 anchor_bottom = 0.98888886
-metadata/_edit_use_anchors_ = true
 
-[node name="Panel" type="Panel" parent="main_content" unique_id=1139200138]
+[node name="Panel" type="Panel" parent="Control/main_content" unique_id=1139200138]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -206,19 +203,18 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_tefeu")
 
-[node name="Chat" parent="main_content" unique_id=723013631 instance=ExtResource("7_o6xl0")]
+[node name="Chat" parent="Control/main_content" unique_id=723013631 instance=ExtResource("7_o6xl0")]
 layout_mode = 1
 
-[node name="folders" type="Control" parent="." unique_id=1608286592]
+[node name="folders" type="Control" parent="Control" unique_id=1608286592]
 layout_mode = 1
 anchor_left = 0.07421875
 anchor_top = 0.044444446
 anchor_right = 0.30546874
 anchor_bottom = 0.7111111
 mouse_filter = 2
-metadata/_edit_use_anchors_ = true
 
-[node name="Panel" type="Panel" parent="folders" unique_id=837780010]
+[node name="Panel" type="Panel" parent="Control/folders" unique_id=837780010]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -229,7 +225,7 @@ mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_tefeu")
 metadata/_edit_use_anchors_ = true
 
-[node name="user" type="Control" parent="." unique_id=190167695]
+[node name="user" type="Control" parent="Control" unique_id=190167695]
 layout_mode = 1
 anchor_left = 0.075
 anchor_top = 0.7222222
@@ -237,9 +233,8 @@ anchor_right = 0.3
 anchor_bottom = 0.98888886
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_use_anchors_ = true
 
-[node name="Panel" type="Panel" parent="user" unique_id=68583380]
+[node name="Panel" type="Panel" parent="Control/user" unique_id=68583380]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -249,7 +244,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_tefeu")
 
-[node name="ButtonSettings" type="Button" parent="user" unique_id=1703057229]
+[node name="ButtonSettings" type="Button" parent="Control/user" unique_id=1703057229]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.028
@@ -263,7 +258,7 @@ offset_bottom = 47.935997
 script = SubResource("GDScript_85g3d")
 popup = ExtResource("9_choun")
 
-[node name="TextureRect" type="TextureRect" parent="user/ButtonSettings" unique_id=1090288964]
+[node name="TextureRect" type="TextureRect" parent="Control/user/ButtonSettings" unique_id=1090288964]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.16700001
@@ -280,6 +275,6 @@ texture = ExtResource("9_85g3d")
 expand_mode = 1
 stretch_mode = 5
 
-[connection signal="pressed" from="VBoxContainer/_create_server" to="." method="_on__create_server_pressed"]
-[connection signal="pressed" from="VBoxContainer/_connect_to_main" to="." method="_on__connect_to_main_pressed"]
-[connection signal="pressed" from="VBoxContainer/_connect" to="." method="_on__connect_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/_create_server" to="." method="_on__create_server_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/_connect_to_main" to="." method="_on__connect_to_main_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/_connect" to="." method="_on__connect_pressed"]
