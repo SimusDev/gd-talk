@@ -16,6 +16,14 @@ static func get_scene() -> PackedScene:
 func _ready() -> void:
 	chat.on_message_synchronized.connect(_on_sync)
 	chat.synchronize_message(id)
+	GDTalk.pkg_users.on_user_connected.connect(_on_user_connected)
+
+func _on_user_connected(user: C_User) -> void:
+	if !resource:
+		return
+	
+	if user.login == resource.sender:
+		$ui_avatar.user = user
 
 func _on_sync(_id: int, msg: R_ChatMessage) -> void:
 	if id != _id:
