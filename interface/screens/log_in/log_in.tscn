@@ -19,6 +19,9 @@ script/source = "extends Button
 @onready var label_info: SD_RichTextLabelSimple = $\"../LabelInfo\"
 
 func _ready() -> void:
+	if GDTalk.pkg_server.is_going_to_be_dedicated():
+		return
+	
 	GDTalk.pkg_server.try_connect_to_main()
 	await SimusNetEvents.event_connected.published
 	
