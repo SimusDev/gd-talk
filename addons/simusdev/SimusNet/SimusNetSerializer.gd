@@ -20,12 +20,13 @@ enum TYPE {
 	IMAGE,
 	IDENTITY,
 	NODE,
+	NODE_FROM,
 	ARRAY,
 	DICTIONARY,
 }
 
 static var __class_and_method: Dictionary[StringName, Callable] = {
-	"Resource": parse_resource,
+	#"Resource": parse_resource,
 	"Object": parse_object,
 	"Array": parse_array,
 	"Dictionary": parse_dictionary,
@@ -44,8 +45,6 @@ static func parse(variant: Variant, try: bool = true) -> Variant:
 	var parsed: Array = []
 	
 	var type_string: String = type_string(typeof(variant))
-	if variant is Object:
-		type_string = variant.get_class()
 	
 	var parsable: bool = false
 	for c in __class_and_method:
@@ -101,10 +100,9 @@ static func parse_node(node: Node) -> Variant:
 		return parse_identity(identity)
 	
 	if node.is_inside_tree():
-		return _create_parsed(TYPE.NODE, node.get_path())
+		return _create_parsed(TYPE.NODE, str(node.get_path()))
 	
 	return _create_parsed(TYPE.NODE)
-	
 
 static func parse_array(array: Array) -> Variant:
 	var result: Array = []

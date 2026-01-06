@@ -7,7 +7,13 @@ static var _active: bool = false
 
 static var _is_dedicated_server: bool = false
 
+static var _instance: SimusNetConnection
+
+var _is_was_server: bool = true
+
 func initialize() -> void:
+	_instance = self
+	
 	singleton.api.connection_failed.connect(_on_connection_failed)
 	singleton.api.connected_to_server.connect(_on_connected_to_server)
 	singleton.api.server_disconnected.connect(_on_server_disconnected)
@@ -34,12 +40,16 @@ func _process(delta: float) -> void:
 			_set_active(true, is_server())
 			process_mode = Node.PROCESS_MODE_DISABLED
 			
+			_is_was_server = true
+			
 			if is_server():
 				SimusNetEvents.event_connected.publish()
-	
-	
+			
+			
+
 
 func _on_connected_to_server() -> void:
+	_is_was_server = false
 	_set_active(true, false)
 	SimusNetHandShake._api_connected_to_server()
 
@@ -69,6 +79,9 @@ static func is_server() -> bool:
 	if get_peer() and is_active():
 		return singleton.api.is_server()
 	return true
+
+static func is_was_server() -> bool:
+	return _instance._is_was_server
 
 static func is_dedicated_server() -> bool:
 	if is_server():
@@ -105,3 +118,18 @@ static func get_unique_id() -> int:
 	if is_active():
 		return singleton.api.get_unique_id()
 	return SERVER_ID
+
+static func connect_network_node_callables(object: Node, on_ready: Callable, on_disconnect: Callable, on_not_connected: Callable) -> void:
+	if !is_active():
+		on_not_connected.call()
+		await SimusNetEvents.event_connected.published
+	
+	SimusNetEvents.event_connected.listen(on_ready)
+	
+	if !object.is_node_ready():
+		await object.ready
+	
+	on_ready.call()
+	
+	SimusNetEvents.event_disconnected.listen(on_disconnect)
+	

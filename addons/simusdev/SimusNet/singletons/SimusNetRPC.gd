@@ -30,17 +30,24 @@ func initialize() -> void:
 	_instance = self
 
 
-func _validate_callable(callable: Callable) -> SimusNetRPCConfig:
+func _validate_callable(callable: Callable, on_recieve: bool = false) -> SimusNetRPCConfig:
 	var object: Object = callable.get_object()
 	var config: SimusNetRPCConfig = SimusNetRPCConfig.try_find_in(callable)
 	if !config:
 		logger.push_error("cant invoke rpc (%s), failed to find rpc config for %s" % [callable, object])
 		return null
 	
-	var rpc_valide: bool = await config._validate()
+	var rpc_valide: bool = false
+	
+	if on_recieve:
+		rpc_valide = await config._validate_on_recieve()
+	else:
+		rpc_valide = await config._validate()
+	
 	if rpc_valide:
 		return config
 	
+	#logger.push_error("failed to validate callable %s" % callable)
 	return null
 
 static func invoke(callable: Callable, ...args: Array) -> void:
@@ -51,6 +58,7 @@ static func invoke_all(callable: Callable, ...args: Array) -> void:
 	_instance._invoke(callable, args)
 
 func _invoke(callable: Callable, args: Array) -> void:
+	
 	if !SimusNetConnection.is_active():
 		return
 	
@@ -70,7 +78,6 @@ func _invoke_on_without_validating(peer: int, callable: Callable, args: Array, c
 		
 	if !SimusNetVisibility.is_visible_for(peer, object) and !SimusNetVisibility.is_method_always_visible(callable):
 		return
-	
 	
 	var identity: SimusNetIdentity = SimusNetIdentity.try_find_in(object)
 	
@@ -109,13 +116,14 @@ func _processor_recieve_rpc_from_peer(peer: int, channel: int, serialized_identi
 		return
 	
 	var args: Array = []
-	var deserialized: Variant = SimusNetDeserializer.parse(serialized_args, config._serialization)
 	
-	if deserialized is Array:
-		args.append_array(deserialized)
-	else:
-		args.append(deserialized)
-	
+	if serialized_args != null:
+		var deserialized: Variant = SimusNetDeserializer.parse(serialized_args, config._serialization)
+		if deserialized is Array:
+			args.append_array(deserialized)
+		else:
+			args.append(deserialized)
+		
 	var callable: Callable
 	
 	if peer == SimusNetConnection.SERVER_ID:
@@ -123,7 +131,7 @@ func _processor_recieve_rpc_from_peer(peer: int, channel: int, serialized_identi
 			object.callv(method_name, args)
 		return
 	
-	var validated_config: SimusNetRPCConfig = await _validate_callable(config.callable)
+	var validated_config: SimusNetRPCConfig = await _validate_callable(config.callable, true)
 	if !validated_config:
 		return
 	

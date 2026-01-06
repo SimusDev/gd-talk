@@ -51,7 +51,7 @@ static func parse_node(data: Variant) -> Node:
 static func parse_array(data: Variant) -> Array:
 	var parsed: Array = []
 	for i in data:
-		parsed.append(parse(data))
+		parsed.append(parse(i))
 	return parsed
 
 static func parse_dictionary(dictionary: Dictionary) -> Dictionary:
