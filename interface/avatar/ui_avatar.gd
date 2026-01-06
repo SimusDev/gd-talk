@@ -25,16 +25,14 @@ func get_scene() -> PackedScene:
 func _ready() -> void:
 	if not user:
 		user = C_User.get_local()
-	
+	_changed()
 
 func _changed() -> void:
 	if is_instance_valid(user):
 		_icon.texture = user.get_avatar()
 		$star.visible = user.is_admin()
-	else:
-		if msg:
-			_icon.texture = msg.avatar
-		else:
-			_icon.texture = null #placeholder
-		$star.visible = false
-		
+
+func set_texture(texture: Texture) -> void:
+	if !is_node_ready():
+		await ready
+	_icon.texture = texture

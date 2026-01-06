@@ -48,7 +48,7 @@ func is_local() -> bool:
 	return _local == self
 
 func _ready() -> void:
-	set_multiplayer_authority(SimusNet.SERVER_ID)
+	set_multiplayer_authority(_peer)
 	
 	if _peer == SimusNetConnection.get_unique_id():
 		_local = self
@@ -56,6 +56,8 @@ func _ready() -> void:
 	SimusNetRPCGodot.register_authority_reliable([
 		_add_right_rpc,
 		_remove_right_rpc,
+		_add_right_server,
+		_remove_right_server,
 	],
 	GDTalk.CHANNELS.USERS
 	)
@@ -66,6 +68,9 @@ func _ready() -> void:
 	GDTalk.CHANNELS.USERS
 	)
 	
+	if not SimusNetConnection.is_server():
+		if _avatar:
+			register_avatar_data_client(login).storage.avatar = SD_Variables.compress_gzip(SimusNetSerializer.parse_image(_avatar.get_image()))
 
 func get_avatar() -> Texture:
 	return _avatar
@@ -92,6 +97,11 @@ func _set_avatar_rpc(image: Variant) -> void:
 			register_avatar_data(login).storage.avatar = SimusNetSerializer.parse_image(_avatar.get_image())
 		
 		register_avatar_data(login).save()
+	else:
+		if _avatar:
+			register_avatar_data_client(login).storage.avatar = SD_Variables.compress_gzip(SimusNetSerializer.parse_image(_avatar.get_image()))
+		
+		register_avatar_data_client(login).save()
 
 func _avatar_error(error: String) -> void:
 	on_avatar_error.emit(error)
@@ -106,7 +116,10 @@ func has_right(id: String) -> bool:
 	return _rights.has(id)
 
 func add_right(id: String) -> void:
-	if SimusNetConnection.is_server():
+	SimusNetRPCGodot.invoke_on_server(_add_right_rpc, id)
+
+func _add_right_server(id: String) -> void:
+	if SimusNetConnection.is_server() or is_admin():
 		if _rights.has(id):
 			return
 		
@@ -120,12 +133,14 @@ func _add_right_rpc(id: String) -> void:
 	on_rights_updated.emit()
 
 func remove_right(id: String) -> void:
-	if SimusNetConnection.is_server():
+	SimusNetRPCGodot.invoke_on_server(_remove_right_server, id)
+
+func _remove_right_server(id: String) -> void:
+	if SimusNetConnection.is_server() or is_admin():
 		if !_rights.has(id):
 			return
 		
 		SimusNetRPCGodot.invoke_all(_remove_right_rpc, id)
-
 
 func _remove_right_rpc(id: String) -> void:
 	_rights.erase(id)
@@ -165,19 +180,21 @@ static func deserialize(data: Dictionary) -> C_User:
 	return user
 
 static func server_create(peer: int, _login: String, password: String) -> C_User:
+	var data := register_server_data(_login)
 	var user := C_User.new()
+	user._data = data
 	user.name = str(peer)
 	user._peer = peer
 	user.login = _login
-	user._data = register_server_data(_login)
-	user._data.storage.password = password
+	data.storage.password = password
+	user._rights = data.storage.get_or_add("rights", PackedStringArray())
 	
 	var avatar: R_ServerData = register_avatar_data(_login)
 	
 	if avatar.storage.has("avatar"):
 		user._set_avatar_rpc(avatar.storage.avatar)
 	
-	user._data.save()
+	data.save()
 	return user
 
 static func register_server_data(_login: String) -> R_ServerData:
@@ -185,3 +202,18 @@ static func register_server_data(_login: String) -> R_ServerData:
 
 static func register_avatar_data(_login: String) -> R_ServerData:
 	return R_ServerData.register("avatars", _login)
+
+static func register_avatar_data_client(_login: String) -> R_ClientData:
+	return R_ClientData.register("avatars", _login)
+
+static func get_user_avatar(_login: String) -> ImageTexture:
+	var user: C_User = C_User.find_by_login(_login)
+	if user:
+		return user.get_avatar()
+	
+	var founded: Variant = register_avatar_data_client(_login).storage.get("avatar", null)
+	if founded != null:
+		founded = SD_Variables.decompress_gzip(founded)
+		founded = SimusNetDeserializer.parse_image(founded)
+		founded = ImageTexture.create_from_image(founded)
+	return founded

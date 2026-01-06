@@ -8,8 +8,10 @@ var _autosave_timer: float = 0.0
 static var _instance: PKG_Storage
 
 const DATA_PATH: String = "user://server_data"
+const DATA_PATH_CLIENT: String = "user://client_data"
 
 static var _datas: Dictionary[String, R_ServerData]
+static var _datas_client: Dictionary[String, R_ClientData]
 
 static func register_data(folder: String, file: String) -> R_ServerData:
 	if !SimusNetConnection.is_server():
@@ -36,6 +38,30 @@ static func register_data(folder: String, file: String) -> R_ServerData:
 	if SimusNetConnection.is_server():
 		ResourceSaver.save(data, filepath)
 	_datas[filepath] = data
+	return data
+	
+
+static func register_data_client(folder: String, file: String) -> R_ClientData:
+	var folder_path: String = DATA_PATH_CLIENT.path_join(folder)
+	SD_FileSystem.make_directory(folder_path)
+	
+	var filepath: String = SD_FileSystem.normalize_path(folder_path.path_join(file))
+	filepath += ".tres"
+	
+	if _datas_client.has(filepath):
+		return _datas_client.get(filepath)
+	
+	var loaded: Resource = ResourceLoader.load(filepath)
+	if loaded:
+		loaded.filepath = filepath
+		_datas_client[filepath] = loaded
+		return loaded
+	
+	var data := R_ClientData.new()
+	data.filepath = filepath
+	if SimusNetConnection.is_server():
+		ResourceSaver.save(data, filepath)
+	_datas_client[filepath] = data
 	return data
 	
 
