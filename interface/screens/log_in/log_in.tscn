@@ -10,7 +10,7 @@
 resource_name = "script"
 script/source = "extends Button
 
-@export_file(\"*.scn *.tscn\") var main_scene:String = \"res://scenes/main.tscn\"
+@export_file var main_scene:String = \"res://scenes/main.tscn\"
 
 @onready var v_box_container: VBoxContainer = $\"..\"
 @onready var ui_loading_animation: UI_LoadingAnimation = $\"../../UiLoadingAnimation\"
