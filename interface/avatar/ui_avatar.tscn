@@ -9,6 +9,9 @@
 shader = ExtResource("1_l8f4l")
 shader_parameter/radius = 128.0
 shader_parameter/size = Vector2(256, 256)
+shader_parameter/border_enabled = false
+shader_parameter/border_width = 2.0
+shader_parameter/border_color = Color(1, 1, 1, 1)
 
 [node name="ui_avatar" type="Control" unique_id=1445784157]
 layout_mode = 3
@@ -32,6 +35,7 @@ expand_mode = 1
 stretch_mode = 6
 
 [node name="star" type="TextureRect" parent="." unique_id=1351248788]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.125
