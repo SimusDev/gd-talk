@@ -7,6 +7,7 @@
 
 [resource]
 script = ExtResource("1_edjui")
+main_server_ip = "194.87.236.101"
 app_screens = Dictionary[StringName, PackedScene]({
 &"gdtalk.account": ExtResource("1_wsabg"),
 &"gdtalk.chat": ExtResource("3_pk8kk"),
