@@ -48,7 +48,6 @@ func _on_sync(_id: int, msg: R_ChatMessage) -> void:
 	user_name_label.text = "[font_size=24]%s[/font_size]" % str( msg.sender )
 	message_text_label.text = str(msg.data)
 
-
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 	if _synced:
 		return
