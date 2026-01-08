@@ -8,6 +8,7 @@ func _ready() -> void:
 	#get_tree().root.position -= Vector2i(640, 480) / 2
 	#SimusNetEvents.event_connected.published.connect(_start)
 	pass
+	PackedStringArray(["s"])
 
 func _start() -> void:
 	#await GDTalk.for_async_synchronize()

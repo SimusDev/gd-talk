@@ -7,6 +7,7 @@ class_name UI_ChatMessage
 @onready var ui_loading_animation: UI_LoadingAnimation = $UiLoadingAnimation
 @onready var message_text_label: SD_RichTextLabel = $MessageTextLabel
 @onready var user_name_label: RichTextLabel = $UserNameLabel
+@onready var time_label: SD_RichTextLabelSimple = $Time
 
 var resource: R_ChatMessage
 
@@ -46,6 +47,7 @@ func _on_sync(_id: int, msg: R_ChatMessage) -> void:
 		$ui_avatar.set_texture(C_User.get_user_avatar(msg.sender))
 	
 	user_name_label.text = "[font_size=24]%s[/font_size]" % str( msg.sender )
+	time_label.text = "[color=gray]%s" % [msg.time]
 	message_text_label.text = str(msg.data)
 
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:

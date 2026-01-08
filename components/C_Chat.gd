@@ -66,7 +66,11 @@ func _send() -> void:
 	if _messages.is_empty():
 		return
 	
-	SimusNetRPCGodot.invoke_on(multiplayer.get_remote_sender_id(), _recieve, _messages.size())
+	SimusNetRPCGodot.invoke_on(
+		multiplayer.get_remote_sender_id(),
+		_recieve,
+		_messages.size()
+		)
 
 func _recieve(messages_count: int) -> void:
 	_messages_count = messages_count

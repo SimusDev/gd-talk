@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bbo6fhliu2ml" path="res://interface/loading/ui_loading_animation.tscn" id="2_b6mma"]
 [ext_resource type="PackedScene" uid="uid://iv1pt2snl3c" path="res://interface/avatar/ui_avatar.tscn" id="3_sq56o"]
 [ext_resource type="Script" uid="uid://7a6v13hisjmu" path="res://addons/simusdev/localization/SD_RichTextLabel.gd" id="4_87jr0"]
+[ext_resource type="Script" uid="uid://851bhpxqx0n8" path="res://addons/simusdev/localization/SD_RichTextLabelSimple.gd" id="5_mhqfr"]
 
 [node name="Messsage" type="Panel" unique_id=451878850]
 custom_minimum_size = Vector2(512, 70)
@@ -47,6 +48,7 @@ offset_bottom = -6.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/normal_font_size = 16
+text = "sex"
 script = ExtResource("4_87jr0")
 metadata/_custom_type_script = "uid://7a6v13hisjmu"
 
@@ -56,12 +58,29 @@ anchors_preset = -1
 anchor_left = 0.141
 anchor_right = 0.141
 offset_left = -0.19200134
-offset_right = 439.80798
+offset_right = 287.80798
 offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
 bbcode_enabled = true
 scroll_active = false
+autowrap_mode = 0
+
+[node name="Time" type="RichTextLabel" parent="." unique_id=1386639855]
+layout_mode = 0
+offset_left = 360.0
+offset_top = 8.0
+offset_right = 504.0
+offset_bottom = 24.0
+mouse_filter = 2
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[color=gray]15:29"
+scroll_active = false
+shortcut_keys_enabled = false
+horizontal_alignment = 2
+script = ExtResource("5_mhqfr")
+metadata/_custom_type_script = "uid://851bhpxqx0n8"
 
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

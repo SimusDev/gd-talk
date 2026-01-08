@@ -15,6 +15,7 @@ const _INTERFACES: Dictionary[int, PackedScene] = {
 
 var sender: String = ""
 var data: Variant
+var time: String = "00:00"
 
 var _interface: PackedScene
 
@@ -35,6 +36,10 @@ static func create(from: Variant, user: C_User = null) -> R_ChatMessage:
 		message.data = str(from)
 	
 	message._interface = _INTERFACES.get(m_type)
+	message.time = "%s:%s" % [
+		Time.get_datetime_dict_from_system()["hour"],
+		Time.get_datetime_dict_from_system()["minute"]
+		]
 	
 	return message
 

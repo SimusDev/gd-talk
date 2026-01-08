@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="R_ServerData" format=3]
+[gd_resource type="Resource" script_class="R_ServerData" format=3 uid="uid://dn3pbycetpmrt"]
 
-[ext_resource type="Script" path="res://components/R_ServerData.gd" id="1_jba3t"]
+[ext_resource type="Script" uid="uid://mdljvd5dyjd2" path="res://components/R_ServerData.gd" id="1_jba3t"]
 
 [resource]
 script = ExtResource("1_jba3t")
