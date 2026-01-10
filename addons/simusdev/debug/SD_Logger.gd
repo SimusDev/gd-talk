@@ -13,6 +13,8 @@ func _init(name: Variant) -> void:
 		_name = name.get_class()
 		if name.get_script():
 			_name = name.get_script().get_global_name()
+		if name is Node:
+			_name += ", " + str(name)
 	
 	
 
@@ -31,4 +33,4 @@ static func variant_to_string(variant: Variant) -> String:
 	return str(variant)
 
 func debug(message: Variant, category: int = 0) -> SD_ConsoleMessage:
-	return _console.write("[%s]: %s" % message, category)
+	return _console.write("[%s]: %s" % [_name, message], category)

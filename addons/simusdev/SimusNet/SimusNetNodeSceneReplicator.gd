@@ -84,7 +84,7 @@ func deserialize_node(bytes: PackedByteArray) -> Node:
 	node.name = data[KEY.NAME]
 	
 	if data.has(KEY.TRANSFORM):
-		node.transform = data.transform
+		node.transform = data[KEY.TRANSFORM]
 	if data.has(KEY.MULTIPLAYER_AUTHORITY):
 		node.set_multiplayer_authority(data[KEY.MULTIPLAYER_AUTHORITY])
 	
@@ -146,6 +146,7 @@ func _send() -> void:
 	SimusNetRPCGodot.invoke_on(multiplayer.get_remote_sender_id(), _receive, serialize_nodes(root.get_children()))
 
 func _receive(packet: Variant) -> void:
+	
 	var nodes: Array[Node] = deserialize_nodes(packet)
 	for i in nodes:
 		root.add_child(i)
@@ -159,8 +160,6 @@ func _receive_deletion(packet: Variant) -> void:
 var _child_count: int = 0
 
 func _on_child_entered_tree(node: Node) -> void:
-	if !node.is_node_ready():
-		await node.ready
 	
 	node.name = node.name.validate_node_name()
 	if optimize_paths:
@@ -179,11 +178,12 @@ func _process(delta: float) -> void:
 		return
 	
 	if !_queue.is_empty():
-		SimusNetRPC.invoke(_receive, serialize_nodes(_queue))
+		SimusNetRPCGodot.invoke(_receive, serialize_nodes(_queue))
+		_queue.clear()
 	
 	if !_queue_delete.is_empty():
-		SimusNetRPC.invoke(_receive_deletion, serialize_nodes_to_delete(_queue_delete, root))
-	
+		SimusNetRPCGodot.invoke(_receive_deletion, serialize_nodes_to_delete(_queue_delete, root))
+		_queue_delete.clear()
 
 func _network_ready() -> void:
 	super()
@@ -199,8 +199,8 @@ func _network_ready() -> void:
 				i.name = str(_child_count)
 				_child_count += 1
 		
-		child_entered_tree.connect(_on_child_entered_tree)
-		child_exiting_tree.connect(_on_child_exiting_tree)
+		root.child_entered_tree.connect(_on_child_entered_tree)
+		root.child_exiting_tree.connect(_on_child_exiting_tree)
 	else:
 		_synchronize()
 
@@ -209,8 +209,8 @@ func _network_disconnect() -> void:
 	set_process(false)
 	
 	if SimusNetConnection.is_was_server():
-		child_entered_tree.disconnect(_on_child_entered_tree)
-		child_exiting_tree.disconnect(_on_child_exiting_tree)
+		root.child_entered_tree.disconnect(_on_child_entered_tree)
+		root.child_exiting_tree.disconnect(_on_child_exiting_tree)
 	else:
 		_clear_children()
 

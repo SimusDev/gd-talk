@@ -3,6 +3,7 @@ extends RefCounted
 class_name SD_ECS
 
 const METHOD: StringName = "get_ECS"
+const META: StringName = "SD_ECS"
 const _LOG_NAME: StringName = "[SD_ECS]: %s"
 
 enum PICK_RETURN {
@@ -46,8 +47,14 @@ static func get_components_from(object: Object) -> Array:
 			return value
 		_debug_log_from_object(object, "%s must return an Array!" % METHOD, SD_ConsoleCategories.ERROR)
 	else:
-		_debug_log_from_object(object, "method %s was not found." % METHOD, SD_ConsoleCategories.ERROR)
-	return []
+		_debug_log_from_object(object, "method %s was not found." % METHOD, SD_ConsoleCategories.WARNING)
+	
+	if object.has_meta(META):
+		return object.get_meta(META)
+	
+	var result: Array = []
+	object.set_meta(META, result)
+	return result
 
 static func find_base_script(script: Script, recursive: bool = true) -> Script:
 	if not script:
@@ -122,3 +129,12 @@ static func find_first_component_by_value(from: Object, by: Array[Variant]) -> V
 
 static func _debug_log_from_object(object: Object, text: Variant, category: int) -> SD_ConsoleMessage:
 	return SD_Console.i().write_from_object(object, _LOG_NAME % text, category)
+
+static func node_find_above_by_script(from: Node, script: Script) -> Node:
+	if find_base_script(from.get_script()) == script or from.get_script() == script:
+		return from
+	
+	if from == SimusDev.get_tree().root:
+		return null
+	
+	return node_find_above_by_script(from.get_parent(), script)
